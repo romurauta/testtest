@@ -20,6 +20,8 @@ jspm_packages/
 # Optional eslint cache
 .eslintcache
 
+.output/
+
 # Nuxt generated files and directories
 dist/
 build/
