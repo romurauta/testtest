@@ -1,8 +1,15 @@
-import db from "../db"
+import { collection, getDocs, query, where, updateDoc, doc } from "firebase/firestore"
+import { db } from "../lib/firestore"
+
 export default defineEventHandler(async (event) => {
 	if (event.method === "GET") {
 		try {
-			const results = db.prepare("SELECT * FROM ottelut").all()
+			// Hae kaikki ottelut Firestoresta
+			const querySnapshot = await getDocs(collection(db, "ottelut"))
+			const results = []
+			querySnapshot.forEach((doc) => {
+				results.push({ id: doc.id, ...doc.data() })
+			})
 			return results
 		} catch (error) {
 			console.error("Virhe otteluiden haussa:", error)
@@ -19,20 +26,23 @@ export default defineEventHandler(async (event) => {
 		}
 
 		try {
-			// Päivitetään ottelutulokset tietokantaan
-			const result = db
-				.prepare(
-					`
-                UPDATE ottelut
-                SET joukkue1_voitetut = ?, joukkue2_voitetut = ?
-                WHERE kentta = ? AND aika = ?
-            `
-				)
-				.run(joukkue1Voitetut, joukkue2Voitetut, kentta, aika)
+			// Hae ottelun dokumentti Firestoresta
+			const ottelutRef = collection(db, "ottelut")
+			const q = query(ottelutRef, where("kentta", "==", kentta), where("aika", "==", aika))
+			const querySnapshot = await getDocs(q)
 
-			if (result.changes === 0) {
+			if (querySnapshot.empty) {
 				return { error: "Ottelua ei löytynyt" }
 			}
+
+			// Päivitetään ensimmäinen löytynyt dokumentti (oletetaan, että kenttä ja aika ovat yksilöllisiä)
+			const otteluDoc = querySnapshot.docs[0]
+			const docRef = doc(db, "ottelut", otteluDoc.id)
+
+			await updateDoc(docRef, {
+				joukkue1_voitetut: joukkue1Voitetut,
+				joukkue2_voitetut: joukkue2Voitetut,
+			})
 
 			return { success: true }
 		} catch (error) {

@@ -1,15 +1,25 @@
-import db from "../db"
+import { collection, getDocs, query, where, updateDoc, doc } from "firebase/firestore"
+import { db } from "../lib/firestore"
 
 export default defineEventHandler(async (event) => {
 	const method = getMethod(event)
 
 	if (method === "GET") {
-		// Palauta kaikki pelaajat
-		return db.prepare("SELECT * FROM pelaajat").all()
+		try {
+			// Palauta kaikki pelaajat
+			const querySnapshot = await getDocs(collection(db, "pelaajat"))
+			const players = []
+			querySnapshot.forEach((doc) => {
+				players.push({ id: doc.id, ...doc.data() })
+			})
+			return players
+		} catch (error) {
+			console.error("Virhe pelaajien haussa:", error)
+			return { error: "Virhe pelaajien haussa" }
+		}
 	}
 
 	if (method === "POST") {
-		// Päivitä pelaajan tiedot
 		const { nimi, kill = 0, death = 0, assist = 0 } = await readBody(event)
 
 		if (!nimi) {
@@ -17,27 +27,33 @@ export default defineEventHandler(async (event) => {
 		}
 
 		try {
-			// Päivitä pelaajan tilastot tietokantaan
-			const pelaaja = db.prepare("SELECT * FROM pelaajat WHERE nimi = ?").get(nimi)
+			// Hae pelaajan dokumentti Firestoresta
+			const playersRef = collection(db, "pelaajat")
+			const q = query(playersRef, where("nimi", "==", nimi))
+			const querySnapshot = await getDocs(q)
 
-			if (!pelaaja) {
+			if (querySnapshot.empty) {
 				return { error: "Pelaajaa ei löydy" }
 			}
 
-			const uusiKill = pelaaja.kill + kill
-			const uusiDeath = pelaaja.death + death
-			const uusiAssist = pelaaja.assist + assist
+			const playerDoc = querySnapshot.docs[0]
+			const playerData = playerDoc.data()
+
+			const uusiKill = (playerData.kill || 0) + kill
+			const uusiDeath = (playerData.death || 0) + death
+			const uusiAssist = (playerData.assist || 0) + assist
 
 			// Lasketaan uusi ratio
 			const uusiRatio = uusiDeath > 0 ? uusiKill / uusiDeath : uusiKill
 
-			db.prepare(
-				`
-				UPDATE pelaajat
-				SET kill = ?, death = ?, assist = ?, ratio = ?
-				WHERE nimi = ?
-			`
-			).run(uusiKill, uusiDeath < 0 ? 0 : uusiDeath, uusiAssist, uusiRatio, nimi)
+			// Päivitä pelaajan tiedot Firestoressa
+			const docRef = doc(db, "pelaajat", playerDoc.id)
+			await updateDoc(docRef, {
+				kill: uusiKill,
+				death: uusiDeath < 0 ? 0 : uusiDeath,
+				assist: uusiAssist,
+				ratio: uusiRatio,
+			})
 
 			return { success: true, nimi, uusiKill, uusiDeath, uusiAssist, uusiRatio }
 		} catch (error) {

@@ -1,47 +1,58 @@
-import db from "../db"
+import { collection, getDocs, addDoc, deleteDoc, doc } from "firebase/firestore"
+import { db } from "../lib/firestore"
 
 export default defineEventHandler(async (event) => {
-    if (event.method === "GET") {
-        try {
-            const results = db.prepare("SELECT * FROM tiedot").all()
-            return results
-        } catch (error) {
-            console.error("Virhe tietojen haussa:", error)
-            return { error: "Virhe tietojen haussa" }
-        }
-    }
+	const method = getMethod(event)
 
-    if (event.method === "POST") {
-        const { teksti } = await readBody(event)
+	if (method === "GET") {
+		try {
+			// Hae kaikki tiedot Firestoresta
+			const querySnapshot = await getDocs(collection(db, "tiedot"))
+			const results = []
+			querySnapshot.forEach((doc) => {
+				results.push({ id: doc.id, ...doc.data() })
+			})
+			return results
+		} catch (error) {
+			console.error("Virhe tietojen haussa:", error)
+			return { error: "Virhe tietojen haussa" }
+		}
+	}
 
-        if (!teksti || typeof teksti !== "string") {
-            return { error: "Invalid data provided" }
-        }
+	if (method === "POST") {
+		const { teksti } = await readBody(event)
 
-        try {
-            db.prepare("INSERT INTO tiedot (teksti) VALUES (?)").run(teksti)
-            return { success: true }
-        } catch (error) {
-            console.error("Virhe tietokantapäivityksessä:", error)
-            return { error: "Tietokantapäivitys epäonnistui" }
-        }
-    }
+		if (!teksti || typeof teksti !== "string") {
+			return { error: "Invalid data provided" }
+		}
 
-    if (event.method === "DELETE") {
-        const { id } = await readBody(event)
+		try {
+			// Lisää uusi tieto Firestoreen
+			await addDoc(collection(db, "tiedot"), { teksti })
+			return { success: true }
+		} catch (error) {
+			console.error("Virhe tietokantapäivityksessä:", error)
+			return { error: "Tietokantapäivitys epäonnistui" }
+		}
+	}
 
-        if (!id || typeof id !== "number") {
-            return { error: "Invalid ID provided" }
-        }
+	if (method === "DELETE") {
+		const { id } = await readBody(event)
 
-        try {
-            db.prepare("DELETE FROM tiedot WHERE id = ?").run(id)
-            return { success: true }
-        } catch (error) {
-            console.error("Virhe tietokannan päivityksessä:", error)
-            return { error: "Tietokantapäivitys epäonnistui" }
-        }
-    }
+		if (!id || typeof id !== "string") {
+			return { error: "Invalid ID provided" }
+		}
 
-    return { error: "Method not allowed" }
+		try {
+			// Poista tieto Firestoresta
+			const docRef = doc(db, "tiedot", id)
+			await deleteDoc(docRef)
+			return { success: true }
+		} catch (error) {
+			console.error("Virhe tietokannan päivityksessä:", error)
+			return { error: "Tietokantapäivitys epäonnistui" }
+		}
+	}
+
+	return { error: "Method not allowed" }
 })
