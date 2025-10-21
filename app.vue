@@ -96,13 +96,29 @@
               </thead>
 
               <tbody>
-                <tr class="border-pig" v-for="joukkue in sarjataulukko" :key="joukkue.nimi" @click="avaaModal(joukkue.nimi)">
-                  <td class="border-pig cursor-pointer hover:bg-lightSmoke text-left pl-8 w-2/12">{{ joukkue.nimi }}</td>
-                  <td class="border-pig">{{ joukkue.voitot }}</td>
-                  <td class="border-pig">{{ joukkue.tasapelit }}</td>
-                  <td class="border-pig">{{ joukkue.havio }}</td>
-                  <td class="border-pig">{{ joukkue.pisteet }}</td>
-                </tr>
+                <!-- Loader: näytetään kun data ei ole valmis -->
+                <template v-if="!sarjataulukko || sarjataulukko.length === 0">
+                  <tr v-for="i in 6" :key="i" class="border-pig animate-pulse">
+                    <td class="border-pig text-left pl-8 w-2/12">-</td>
+                    <td class="border-pig">-</td>
+                    <td class="border-pig">-</td>
+                    <td class="border-pig">-</td>
+                    <td class="border-pig">-</td>
+                  </tr>
+                </template>
+
+                <!-- Data: näytetään kun sarjataulukko on ladattu -->
+                <template v-else>
+                  <tr v-for="joukkue in sarjataulukko" :key="joukkue.nimi" class="border-pig" @click="avaaModal(joukkue.nimi)">
+                    <td class="border-pig cursor-pointer hover:bg-lightSmoke text-left pl-8 w-2/12">
+                      {{ joukkue.nimi }}
+                    </td>
+                    <td class="border-pig">{{ joukkue.voitot }}</td>
+                    <td class="border-pig">{{ joukkue.tasapelit }}</td>
+                    <td class="border-pig">{{ joukkue.havio }}</td>
+                    <td class="border-pig">{{ joukkue.pisteet }}</td>
+                  </tr>
+                </template>
               </tbody>
             </table>
             <p class="italic mt-1 pt-0 text-sm mb-4">Klikkaamalla sarjataulukossa joukkueen nimeä voit tarkastella joukkueen kokoonpanoa.</p>
@@ -188,13 +204,29 @@
           </thead>
 
           <tbody>
-            <tr class="border-pig px-12" v-for="(pelaaja, index) in pelaajat" :key="pelaaja.nimi">
-              <td class="w-3/12 text-left border-pig whitespace-nowrap" :class="{ 'flame-effect': index < 5 }">{{ index + 1 }}. {{ pelaaja.nimi }}</td>
-              <td class="border-pig w-3/12">{{ pelaaja.kill }}</td>
-              <td class="border-pig w-3/12">{{ pelaaja.death }}</td>
-              <td class="border-pig w-3/12">{{ pelaaja.assist }}</td>
-              <td class="border-pig" :class="{ 'flame-effect': index < 5 }">{{ pelaaja.ratio.toFixed(2) }}</td>
-            </tr>
+            <!-- Loader: jos pelaajat ei ole vielä ladattu -->
+            <template v-if="!pelaajat || pelaajat.length === 0">
+              <tr v-for="i in 6" :key="'loader-' + i" class="border-pig animate-pulse">
+                <td class="w-3/12 text-left border-pig whitespace-nowrap px-4">-</td>
+                <td class="border-pig w-3/12">-</td>
+                <td class="border-pig w-3/12">-</td>
+                <td class="border-pig w-3/12">-</td>
+                <td class="border-pig">-</td>
+              </tr>
+            </template>
+
+            <!-- Data: jos pelaajat on ladattu -->
+            <template v-else>
+              <tr v-for="(pelaaja, index) in pelaajat" :key="pelaaja.nimi" class="border-pig px-12">
+                <td class="w-3/12 text-left border-pig whitespace-nowrap" :class="{ 'flame-effect': index < 5 }">{{ index + 1 }}. {{ pelaaja.nimi }}</td>
+                <td class="border-pig w-3/12">{{ pelaaja.kill }}</td>
+                <td class="border-pig w-3/12">{{ pelaaja.death }}</td>
+                <td class="border-pig w-3/12">{{ pelaaja.assist }}</td>
+                <td class="border-pig" :class="{ 'flame-effect': index < 5 }">
+                  {{ pelaaja.ratio.toFixed(2) }}
+                </td>
+              </tr>
+            </template>
           </tbody>
         </table>
         <!--Tässä teksti siksi, että taulukko olis yhtä leveä ko ylempi taulukko. En jaksanu alkaa tyylittelemään nii käytän tämmöstä häksiä-->
