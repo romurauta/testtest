@@ -183,14 +183,7 @@
                 </span>
               </th>
 
-              <th class="border-pig bg-smoke relative group">
-                K/D Ratio
-                <span
-                  class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-max max-w-xs rounded bg-black text-white text-sm px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-50"
-                >
-                  Kill / Death Ratio
-                </span>
-              </th>
+              <th class="border-pig bg-smoke relative group">K/D Ratio</th>
             </tr>
           </thead>
 
