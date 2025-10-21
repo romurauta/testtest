@@ -2,7 +2,7 @@
   <div class="bg-coal text-lg">
     <div class="flex flex-col items-center justify-center py-6">
       <div>
-        <h1 class="text-4xl text-center text-white shadow-lg">Ranuan Kummit CS2-turnaus</h1>
+        <h1 class="text-4xl px-8 text-center text-white shadow-lg">Ranuan Kummit CS2-turnaus</h1>
       </div>
       <div class="mt-8 gap-y-4 items-center justify-between -mb-5">
         <div>
