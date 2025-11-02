@@ -1,11 +1,10 @@
 <template>
   <div class="min-h-screen bg-[#1c1c1c] text-white p-8">
-    <div class="container">
+    <div class="container -mb-4">
       <NuxtLink class="text-3xl" to="/">Etusivu</NuxtLink>
-      <h1 class="text-3xl font-bold text-center mb-8">Joukkueiden valinta</h1>
+      <h1 class="text-3xl font-bold text-center">Joukkueiden valinta</h1>
     </div>
 
-    <!-- Joukkueet -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 container">
       <div
         v-for="(pelaajat, joukkue) in joukkueet"
@@ -33,7 +32,6 @@
       </div>
     </div>
 
-    <!-- Vapaat pelaajat -->
     <div class="bg-[#2c2c2c] p-6 rounded-2xl border border-[#ffb703] container" @dragover.prevent @drop="pudotaVapaaksi">
       <h2 class="text-xl font-semibold mb-4 text-[#ffb703] text-center">Vapaat pelaajat</h2>
       <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
@@ -50,14 +48,13 @@
       </div>
     </div>
 
-    <!-- Napit -->
     <div class="flex flex-col items-center mt-8 space-y-4">
       <button
         class="px-6 py-2 bg-green-500 text-[#1c1c1c] font-semibold rounded-md hover:brightness-90 disabled:opacity-50"
         :disabled="tallennettu"
         @click="tallennaJoukkueet"
       >
-        {{ tallennettu ? 'Joukkueet tallennettu' : 'Tallenna joukkueet' }}
+        {{ tallennettu ? 'Joukkueet lukittu' : 'Tallenna joukkueet' }}
       </button>
       <button class="px-6 py-2 bg-yellow-500 text-[#1c1c1c] font-semibold rounded-md hover:brightness-90" @click="muokkaaJoukkueet">Muokkaa joukkueita</button>
     </div>
@@ -65,7 +62,13 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from 'vue'
+import { ref, onMounted, watch, onUnmounted } from 'vue'
+// HUOM: onSnapshotin ja docin tuonti
+import { doc, onSnapshot } from 'firebase/firestore'
+
+// HUOM: 'db':n tuonti asiakaspuolelle saattaa vaatia muokkauksia firestore.js-tiedostoon
+// tai sen siirtämistä Nuxt-pluginiksi. Tämä on esimerkkituonti.
+import { db } from '~/server/lib/firestore'
 
 const joukkueet = ref({
   wiilis: [],
@@ -114,31 +117,61 @@ const raahaaPelaaja = (pelaaja) => {
   if (!tallennettu.value) raahattuPelaaja.value = pelaaja
 }
 
+// Uusi funktio, joka tallentaa joukkueet Firestoreen raahauksen jälkeen
+const paivitaFirestore = async (uudetJoukkueet) => {
+  try {
+    const { error } = await useFetch('/api/joukkueet', {
+      method: 'POST',
+      body: { joukkueet: uudetJoukkueet },
+    })
+
+    if (error.value) {
+      console.error('Reaaliaikainen tallennus epäonnistui:', error.value)
+    }
+  } catch (err) {
+    console.error('Reaaliaikainen tallennus epäonnistui:', err)
+  }
+}
+
 const pudotaPelaaja = (joukkue) => {
   if (!raahattuPelaaja.value || tallennettu.value) return
+  // Poista pelaaja vanhasta joukkueesta tai vapaista
   for (const key in joukkueet.value) {
     const i = joukkueet.value[key].indexOf(raahattuPelaaja.value)
     if (i !== -1) joukkueet.value[key].splice(i, 1)
   }
   const vIndex = vapaatPelaajat.value.indexOf(raahattuPelaaja.value)
   if (vIndex !== -1) vapaatPelaajat.value.splice(vIndex, 1)
+
+  // Lisää pelaaja uuteen joukkueeseen
   joukkueet.value[joukkue].push(raahattuPelaaja.value)
+
+  // Lähetä päivitys Firestoreen
+  paivitaFirestore(joukkueet.value)
+
   raahattuPelaaja.value = null
 }
 
 const pudotaVapaaksi = () => {
   if (!raahattuPelaaja.value || tallennettu.value) return
+  // Poista pelaaja vanhasta joukkueesta
   for (const key in joukkueet.value) {
     const i = joukkueet.value[key].indexOf(raahattuPelaaja.value)
     if (i !== -1) joukkueet.value[key].splice(i, 1)
   }
+
+  // Lisää pelaaja vapaisiin
   if (!vapaatPelaajat.value.includes(raahattuPelaaja.value)) {
     vapaatPelaajat.value.push(raahattuPelaaja.value)
   }
+
+  // Lähetä päivitys Firestoreen
+  paivitaFirestore(joukkueet.value)
+
   raahattuPelaaja.value = null
 }
 
-// Paikallinen tallennus ja päivitys
+// Paikallinen tallennus ja vapaiden pelaajien laskenta (pidä tämä)
 watch(
   joukkueet,
   (newVal) => {
@@ -149,8 +182,11 @@ watch(
   { deep: true }
 )
 
-// Hae tallennetut joukkueet
-onMounted(async () => {
+// Reaaliaikainen päivitys Firestoresta
+let unsubscribe = () => {}
+
+onMounted(() => {
+  // Ladataan ensin paikallinen tallennus (fallback)
   const saved = localStorage.getItem('joukkueet')
   if (saved) {
     const parsed = JSON.parse(saved)
@@ -161,41 +197,43 @@ onMounted(async () => {
     }
   }
 
-  try {
-    const { data } = await useFetch('/api/joukkueet', { method: 'GET' })
-    if (data.value && data.value.joukkueet) {
-      for (const key in data.value.joukkueet) {
-        if (joukkueet.value[key]) {
-          joukkueet.value[key] = data.value.joukkueet[key]
+  // Aseta Firestore-kuuntelija reaaliaikaista synkronointia varten
+  const docRef = doc(db, 'kokoonpanot', 'nykyiset')
+
+  unsubscribe = onSnapshot(
+    docRef,
+    (docSnap) => {
+      if (docSnap.exists()) {
+        const firestoreJoukkueet = docSnap.data().joukkueet
+
+        // Päivitä `joukkueet`-ref-olio Firestore-datalla
+        for (const key in firestoreJoukkueet) {
+          if (joukkueet.value[key]) {
+            // Korvaa joukkueen pelaajalista Firestoren datalla
+            joukkueet.value[key] = firestoreJoukkueet[key]
+          }
         }
+        console.log('Joukkueet päivitetty reaaliaikaisesti Firestoresta')
+      } else {
+        console.log('Ei joukkueita Firestoresta')
       }
+    },
+    (error) => {
+      console.error('Virhe reaaliaikaisessa kuuntelussa:', error)
     }
-  } catch (err) {
-    console.error('Virhe joukkueiden haussa Firestoresta:', err)
-  }
+  )
 })
 
-// Tallenna Firestoreen
+onUnmounted(() => {
+  // Pysäytä kuuntelija, kun komponentti poistuu
+  unsubscribe()
+})
+
+// Tallenna/Lukitse joukkueet (käyttää nyt samaa paivitaFirestorea)
 const tallennaJoukkueet = async () => {
-  try {
-    const { data, error } = await useFetch('/api/joukkueet', {
-      method: 'POST',
-      body: { joukkueet: joukkueet.value },
-    })
-
-    if (error.value) {
-      console.error('Tallennus epäonnistui:', error.value)
-      return
-    }
-
-    if (data.value.success) {
-      tallennettu.value = true
-    } else {
-      console.error('Tallennus epäonnistui:', data.value)
-    }
-  } catch (err) {
-    console.error('Tallennus epäonnistui:', err)
-  }
+  // Lähetä lopullinen tila Firestoreen ja merkitse tallennetuksi
+  await paivitaFirestore(joukkueet.value)
+  tallennettu.value = true
 }
 
 // Muokkaa joukkueita uudelleen
