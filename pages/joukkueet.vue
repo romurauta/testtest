@@ -87,9 +87,9 @@ const kaikkiPelaajat = [
   'Jerbanderus',
   'Hasse',
   's1mple',
-  'Pule',
+  '-Pule',
   'Jakender',
-  'elmeri',
+  'elmeri:D',
   'Are',
   'Plasen',
   'Verdi',
@@ -99,7 +99,7 @@ const kaikkiPelaajat = [
   'Candle',
   'Pantsi',
   'GGranny',
-  'Sane',
+  'antiinsane',
 ]
 
 const vapaatPelaajat = ref([...kaikkiPelaajat])

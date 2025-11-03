@@ -1,8 +1,8 @@
 {
 	"sarjataulukko": [
-		{ "nimi": "HH", "voitot": 0, "tasapelit": 0, "havio": 0, "pisteet": 0 },
-		{ "nimi": "HNJHN", "voitot": 0, "tasapelit": 0, "havio": 0, "pisteet": 0 },
-		{ "nimi": "AAK", "voitot": 0, "tasapelit": 0, "havio": 0, "pisteet": 0 },
+		{ "nimi": "TT", "voitot": 0, "tasapelit": 0, "havio": 0, "pisteet": 0 },
+		{ "nimi": "FomFom", "voitot": 0, "tasapelit": 0, "havio": 0, "pisteet": 0 },
+		{ "nimi": "GN", "voitot": 0, "tasapelit": 0, "havio": 0, "pisteet": 0 },
 		{ "nimi": "100KL", "voitot": 0, "tasapelit": 0, "havio": 0, "pisteet": 0 },
 		{ "nimi": "KN", "voitot": 0, "tasapelit": 0, "havio": 0, "pisteet": 0 },
 		{ "nimi": "VFC", "voitot": 0, "tasapelit": 0, "havio": 0, "pisteet": 0 }
@@ -18,7 +18,7 @@
 		{ "nimi": "wiilis", "kill": 0, "death": 0, "assist": 0, "ratio": 0 },
 		{ "nimi": "pantsi", "kill": 0, "death": 0, "assist": 0, "ratio": 0 },
 		{ "nimi": "ZzeiT", "kill": 0, "death": 0, "assist": 0, "ratio": 0 },
-		{ "nimi": "Perä_carry", "kill": 0, "death": 0, "assist": 0, "ratio": 0 },
+		{ "nimi": "GGranny", "kill": 0, "death": 0, "assist": 0, "ratio": 0 },
 		{ "nimi": "-Pule", "kill": 0, "death": 0, "assist": 0, "ratio": 0 },
 		{ "nimi": "jreiii", "kill": 0, "death": 0, "assist": 0, "ratio": 0 },
 		{ "nimi": "vedivaan", "kill": 0, "death": 0, "assist": 0, "ratio": 0 },
@@ -37,6 +37,6 @@
 		{ "nimi": "J0nesy", "kill": 0, "death": 0, "assist": 0, "ratio": 0 },
 		{ "nimi": "Peksi", "kill": 0, "death": 0, "assist": 0, "ratio": 0 },
 		{ "nimi": "romurauta", "kill": 0, "death": 0, "assist": 0, "ratio": 0 },
-		{ "nimi": "Omppu6", "kill": 0, "death": 0, "assist": 0, "ratio": 0 }
+		{ "nimi": "antiinsane", "kill": 0, "death": 0, "assist": 0, "ratio": 0 }
 	]
 }
