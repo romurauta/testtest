@@ -3,9 +3,9 @@
 		{ "nimi": "TT", "voitot": 0, "tasapelit": 0, "havio": 0, "pisteet": 0 },
 		{ "nimi": "FomFom", "voitot": 0, "tasapelit": 0, "havio": 0, "pisteet": 0 },
 		{ "nimi": "GN", "voitot": 0, "tasapelit": 0, "havio": 0, "pisteet": 0 },
-		{ "nimi": "100KL", "voitot": 0, "tasapelit": 0, "havio": 0, "pisteet": 0 },
-		{ "nimi": "KN", "voitot": 0, "tasapelit": 0, "havio": 0, "pisteet": 0 },
-		{ "nimi": "VFC", "voitot": 0, "tasapelit": 0, "havio": 0, "pisteet": 0 }
+		{ "nimi": "NVS", "voitot": 0, "tasapelit": 0, "havio": 0, "pisteet": 0 },
+		{ "nimi": "JATS", "voitot": 0, "tasapelit": 0, "havio": 0, "pisteet": 0 },
+		{ "nimi": "SB", "voitot": 0, "tasapelit": 0, "havio": 0, "pisteet": 0 }
 	],
 	"pelaajat": [
 		{ "nimi": "Mussu", "kill": 0, "death": 0, "assist": 0, "ratio": 0 },

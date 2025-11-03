@@ -94,7 +94,7 @@ const kaikkiPelaajat = [
   'Plasen',
   'Verdi',
   'Mussu',
-  'Jonesy',
+  'J0nesy',
   'nico_ilari',
   'Candle',
   'Pantsi',
