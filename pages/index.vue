@@ -4,7 +4,7 @@
       <div>
         <h1 class="text-4xl px-8 text-center text-white shadow-lg">Ranuan Kummit CS2-turnaus</h1>
       </div>
-      <div class="mt-8 gap-y-4 items-center justify-between -mb-5">
+      <div class="grid grid-cols-1 mt-8 gap-y-4 items-center justify-between -mb-5">
         <div>
           <div class="text-white">
             <!-- Näytetään joko Kirjaudu-painike tai salasana-kenttä ja painike -->
@@ -23,6 +23,11 @@
               <button class="text-cta ml-2 px-4 py-1 border border-pig hover:bg-lightSmoke" @click="kirjauduSisaan">Kirjaudu</button>
             </div>
           </div>
+        </div>
+        <div>
+          <button class="text-cta ml-2 px-4 py-1 border border-pig hover:bg-lightSmoke">
+            <NuxtLink to="mapban">Kartan valinta</NuxtLink>
+          </button>
         </div>
       </div>
     </div>
