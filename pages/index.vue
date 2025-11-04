@@ -139,17 +139,21 @@
             </div>
 
             <div class="pt-6" v-if="onKirjautunut">
-              <div class="mb-4 flex items-center">
-                <p class="pr-6">Lisää joukkueelle:</p>
-                <button class="px-4 text-cta py-1 mr-4 border border-pig hover:bg-lightSmoke bg-coal" @click="lisaaTulos('voitto', +1)">Voitto</button>
-                <button class="px-4 text-cta py-1 border border-pig hover:bg-lightSmoke bg-coal" @click="lisaaTulos('tasapeli', +1)">Tasapeli</button>
-                <button class="px-4 text-cta py-1 mx-4 border border-pig hover:bg-lightSmoke bg-coal" @click="lisaaTulos('havio', +1)">Häviö</button>
+              <p class="pr-6">Lisää joukkueelle</p>
+              <div class="mb-4 flex items-center md:border-none md:pb-0 pb-8 border-b">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-0">
+                  <button class="px-4 text-cta py-1 mr-4 border border-pig hover:bg-lightSmoke bg-coal" @click="lisaaTulos('voitto', +1)">Voitto</button>
+                  <button class="px-4 text-cta py-1 border border-pig hover:bg-lightSmoke bg-coal" @click="lisaaTulos('tasapeli', +1)">Tasapeli</button>
+                  <button class="px-4 text-cta py-1 mx-0 md:mx-4 border border-pig hover:bg-lightSmoke bg-coal" @click="lisaaTulos('havio', +1)">Häviö</button>
+                </div>
               </div>
+              <p class="pr-4">Poista joukkueelta</p>
               <div class="mb-4 flex items-center">
-                <p class="pr-4">Poista joukkueelta:</p>
-                <button class="px-4 text-cta py-1 mr-4 border border-pig hover:bg-lightSmoke bg-coal" @click="lisaaTulos('voitto', -1)">Voitto</button>
-                <button class="px-4 text-cta py-1 border border-pig hover:bg-lightSmoke bg-coal" @click="lisaaTulos('tasapeli', -1)">Tasapeli</button>
-                <button class="px-4 text-cta py-1 mx-4 border border-pig hover:bg-lightSmoke bg-coal" @click="lisaaTulos('havio', -1)">Häviö</button>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-0">
+                  <button class="px-4 text-cta py-1 mr-4 border border-pig hover:bg-lightSmoke bg-coal" @click="lisaaTulos('voitto', -1)">Voitto</button>
+                  <button class="px-4 text-cta py-1 border border-pig hover:bg-lightSmoke bg-coal" @click="lisaaTulos('tasapeli', -1)">Tasapeli</button>
+                  <button class="px-4 text-cta py-1 mx-0 md:mx-4 border border-pig hover:bg-lightSmoke bg-coal" @click="lisaaTulos('havio', -1)">Häviö</button>
+                </div>
               </div>
             </div>
 
@@ -393,15 +397,14 @@
                 <div v-if="naytaTulosModal" class="fixed inset-0 flex items-center justify-center">
                   <div class="bg-coal text-white p-12 rounded-md shadow-xl shadow-black w-1/3">
                     <h2 class="text-lg font-bold mb-4">Muokkaa tuloksia</h2>
-                    <p>{{ valittuKentta }}</p>
                     <div class="flex items-center mb-4">
-                      <input type="number" class="w-12 mr-2 px-1 py-1 border border-pig rounded-md" v-model.number="modalData.voitetut" placeholder="0" />
+                      <input type="number" class="w-12 mr-2 px-1 py-1 border bg-smoke border-pig rounded-md" v-model.number="modalData.voitetut" placeholder="0" />
                       -
-                      <input type="number" class="w-12 ml-2 px-1 py-1 border border-pig rounded-md" v-model.number="modalData.havitut" placeholder="0" />
+                      <input type="number" class="w-12 ml-2 px-1 py-1 border bg-smoke border-pig rounded-md" v-model.number="modalData.havitut" placeholder="0" />
                     </div>
                     <div class="flex justify-end gap-4">
-                      <button class="mt-6 px-4 py-2 bg-white text-cta border border-pig" @click="suljeTulosModal">Peruuta</button>
                       <button class="mt-6 px-4 py-2 border border-pig" @click="tallennaTulosModal">Tallenna</button>
+                      <button class="mt-6 px-4 py-2 text-white bg-cta border border-pig" @click="suljeTulosModal">Peruuta</button>
                     </div>
                   </div>
                 </div>
@@ -631,7 +634,19 @@ export default {
           kentta3Havitut: 0,
         },
         {
-          aika: '5. 21:00-21:45',
+          aika: '21:00-21:45',
+          kentta1: 'RUOKATAUKO',
+          kentta1Voitetut: null,
+          kentta1Havitut: null,
+          kentta2: 'RUOKATAUKO',
+          kentta2Voitetut: null,
+          kentta2Havitut: null,
+          kentta3: 'RUOKATAUKO',
+          kentta3Voitetut: null,
+          kentta3Havitut: null,
+        },
+        {
+          aika: '5. 21:45-22:30',
           kentta1: 'TT vs SB',
           kentta1Voitetut: 0,
           kentta1Havitut: 0,
@@ -643,58 +658,73 @@ export default {
           kentta3Havitut: 0,
         },
         {
-          aika: '6. 21:45-22:30',
-          kentta1: 'TT vs JATS',
+          aika: '6. 22:30-23:15',
+          kentta1: 'JATS vs TT',
           kentta1Voitetut: 0,
           kentta1Havitut: 0,
-          kentta2: 'FomFom vs NVS',
+          kentta2: 'NVS vs FomFom',
           kentta2Voitetut: 0,
           kentta2Havitut: 0,
-          kentta3: 'GN vs SB',
+          kentta3: 'SB vs GN',
           kentta3Voitetut: 0,
           kentta3Havitut: 0,
         },
         {
-          aika: '7. 22:30-23:15',
-          kentta1: 'TT vs FomFom',
+          aika: '7. 23:15-00:00',
+          kentta1: 'FomFom vs TT',
           kentta1Voitetut: 0,
           kentta1Havitut: 0,
-          kentta2: 'JATS vs GN',
+          kentta2: 'GN vs JATS',
           kentta2Voitetut: 0,
           kentta2Havitut: 0,
-          kentta3: 'NVS vs SB',
+          kentta3: 'SB vs NVS',
           kentta3Voitetut: 0,
           kentta3Havitut: 0,
         },
         {
-          aika: '8. 23:15-00:00',
-          kentta1: 'TT vs NVS',
+          aika: '8. 00:00-00:45',
+          kentta1: 'NVS vs TT',
           kentta1Voitetut: 0,
           kentta1Havitut: 0,
-          kentta2: 'JATS vs SB',
+          kentta2: 'SB vs JATS',
           kentta2Voitetut: 0,
           kentta2Havitut: 0,
-          kentta3: 'FomFom vs GN',
+          kentta3: 'GN vs FomFom',
           kentta3Voitetut: 0,
           kentta3Havitut: 0,
         },
         {
-          aika: '9. 00:00-00:45',
-          kentta1: 'TT vs GN',
+          aika: '9. 00:45-01:30',
+          kentta1: 'GN vs TT',
           kentta1Voitetut: 0,
           kentta1Havitut: 0,
-          kentta2: 'JATS vs NVS',
+          kentta2: 'NVS vs JATS',
           kentta2Voitetut: 0,
           kentta2Havitut: 0,
-          kentta3: 'NVS vs GN',
+          kentta3: 'SB vs FomFom',
           kentta3Voitetut: 0,
           kentta3Havitut: 0,
         },
       ],
       otteluohjelmaLauantai: [
         {
-          aika: '11. 11:00-11:45',
+          aika: '10. 11:00-11:45',
+          kentta1: 'SB vs TT',
+          kentta1Voitetut: 0,
+          kentta1Havitut: 0,
+          kentta2: 'FomFom vs JATS',
+          kentta2Voitetut: 0,
+          kentta2Havitut: 0,
+          kentta3: 'GN vs NVS',
+          kentta3Voitetut: 0,
+          kentta3Havitut: 0,
+          onTulosNakyva: true,
+        },
+        {
+          aika: '11. 11:45-12:30',
           kentta1: 'TT vs JATS',
+          kentta1Voitetut: 0,
+          kentta1Havitut: 0,
           kentta2: 'FomFom vs NVS',
           kentta2Voitetut: 0,
           kentta2Havitut: 0,
@@ -704,7 +734,7 @@ export default {
           onTulosNakyva: true,
         },
         {
-          aika: '12. 11:45-12:30',
+          aika: '12. 12:30-13:15',
           kentta1: 'TT vs FomFom',
           kentta1Voitetut: 0,
           kentta1Havitut: 0,
@@ -717,43 +747,16 @@ export default {
           onTulosNakyva: true,
         },
         {
-          aika: '13. 12:30-13:15',
-          kentta1: 'TT vs NVS',
-          kentta1Voitetut: 0,
-          kentta1Havitut: 0,
-          kentta2: 'JATS vs SB',
-          kentta2Voitetut: 0,
-          kentta2Havitut: 0,
-          kentta3: 'FomFom vs GN',
-          kentta3Voitetut: 0,
-          kentta3Havitut: 0,
-          onTulosNakyva: true,
-        },
-        {
-          aika: '14. 13:15-14:00',
-          kentta1: 'TT vs GN',
-          kentta1Voitetut: 0,
-          kentta1Havitut: 0,
-          kentta2: 'JATS vs NVS',
-          kentta2Voitetut: 0,
-          kentta2Havitut: 0,
-          kentta3: 'FomFom vs SB',
-          kentta3Voitetut: 0,
-          kentta3Havitut: 0,
-          onTulosNakyva: true,
-        },
-        {
-          aika: '15. 14:00-14:45',
-          kentta1: 'TT vs SB',
-          kentta1Voitetut: 0,
-          kentta1Havitut: 0,
-          kentta2: 'JATS vs FomFom',
-          kentta2Voitetut: 0,
-          kentta2Havitut: 0,
-          kentta3: 'NVS vs GN',
-          kentta3Voitetut: 0,
-          kentta3Havitut: 0,
-          onTulosNakyva: true,
+          aika: '13:15-14:30',
+          kentta1: 'RUOKATAUKO',
+          kentta1Voitetut: null,
+          kentta1Havitut: null,
+          kentta2: 'RUOKATAUKO',
+          kentta2Voitetut: null,
+          kentta2Havitut: null,
+          kentta3: 'RUOKATAUKO',
+          kentta3Voitetut: null,
+          kentta3Havitut: null,
         },
       ],
     }
@@ -1064,7 +1067,6 @@ export default {
             nimi: this.valittuPelaaja,
             kill: this.muutokset.kill,
             death: this.muutokset.death,
-            assist: this.muutokset.assist,
           }),
         })
 

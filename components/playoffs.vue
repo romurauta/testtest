@@ -8,7 +8,7 @@
 
       <!-- PUOLIVÄLIERÄT -->
       <div class="mb-8">
-        <h3 class="text-lg md:text-xl mb-3 text-cta">Puolivälierät <span class="text-gray-400 text-base">(14:15–16:15)</span></h3>
+        <h3 class="text-lg md:text-xl mb-3 text-cta">Puolivälierät <span class="text-gray-400 text-base">(14:30–16:30)</span></h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div v-for="(match, index) in quarterFinals" :key="'qf-' + index" class="border border-pig p-4 bg-coal">
             <h4 class="font-semibold mb-3">Puolivälierä {{ index + 1 }}</h4>
@@ -48,7 +48,7 @@
 
       <!-- VÄLIERÄT -->
       <div class="mb-8">
-        <h3 class="text-lg md:text-xl mb-3 text-cta">Välierät <span class="text-gray-400 text-base">(16:15–19:15)</span></h3>
+        <h3 class="text-lg md:text-xl mb-3 text-cta">Välierät <span class="text-gray-400 text-base">(16:30–19:30)</span></h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div v-for="(match, index) in semiFinals" :key="'sf-' + index" class="border border-pig p-4 bg-coal">
             <h4 class="font-semibold mb-3">Välierä {{ index + 1 }}</h4>
@@ -88,7 +88,7 @@
 
       <!-- FINAALI -->
       <div class="mb-8">
-        <h3 class="text-lg md:text-xl mb-3 text-cta">Finaali <span class="text-gray-400 text-base">(19:15–21:15)</span></h3>
+        <h3 class="text-lg md:text-xl mb-3 text-cta">Finaali <span class="text-gray-400 text-base">(19:30–21:30)</span></h3>
         <div class="border border-pig p-4 bg-coal">
           <div class="flex flex-col gap-3">
             <input
