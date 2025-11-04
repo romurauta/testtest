@@ -34,7 +34,7 @@
 
       <div class="mb-4 text-center">
         <p v-if="!isDone" class="text-lg font-semibold">
-          Joukkueen <span class="text-cta">{{ currentTeamName }}</span> {{ currentActionText }}
+          Joukkue <span class="text-cta">{{ currentTeamName }}</span> {{ currentActionText }}
         </p>
         <p v-else class="text-lg text-green-400 font-semibold">Kartat valittu</p>
       </div>
