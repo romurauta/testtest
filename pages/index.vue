@@ -6,23 +6,24 @@
       </div>
       <div class="mt-8 gap-y-4 items-center justify-between -mb-5">
         <div>
-          <div v-if="!onKirjautunut" class="text-white">
-            <label for="salasana"></label>
-            <input
-              id="salasana"
-              v-model="salasana"
-              placeholder="Anna salasana"
-              type="password"
-              class="px-2 py-1 rounded-md border border-pig bg-smoke max-w-44 mb-4"
-              :class="virhe ? 'border-red-500' : 'border-pig'"
-            />
-            <button class="text-cta ml-2 px-4 py-1 border border-pig hover:bg-lightSmoke" @click="kirjauduSisaan">Kirjaudu</button>
+          <div class="text-white">
+            <!-- Näytetään joko Kirjaudu-painike tai salasana-kenttä ja painike -->
+            <div v-if="!naytaSalasanaKentta">
+              <button class="text-cta ml-2 px-4 py-1 border border-pig hover:bg-lightSmoke" @click="naytaSalasanaKentta = true">Kirjaudu</button>
+            </div>
+            <div v-else>
+              <input
+                id="salasana"
+                v-model="salasana"
+                placeholder="Anna salasana"
+                type="password"
+                class="px-2 py-1 rounded-md border border-pig bg-smoke max-w-44 mb-4"
+                :class="virhe ? 'border-red-500' : 'border-pig'"
+              />
+              <button class="text-cta ml-2 px-4 py-1 border border-pig hover:bg-lightSmoke" @click="kirjauduSisaan">Kirjaudu</button>
+            </div>
           </div>
         </div>
-        <!--        <div>
-          <NuxtLink class="px-4 py-2 border border-pig hover:bg-lightSmoke text-cta bg-coal ml-2" to="/joukkueet">Joukkueet</NuxtLink>
-        </div>
-        -->
       </div>
     </div>
 
@@ -172,7 +173,7 @@
 
       <section class="text-white px-8 py-6 flex flex-col items-center">
         <h2 class="mb-4 text-xl md:text-2xl">Tilastot</h2>
-        <table class="border-pig w-full text-sm">
+        <table class="border-pig w-full sm:w-1/3 md:2/3 text-sm">
           <thead class="border-pig">
             <tr>
               <th class="border-pig bg-smoke">Pelaaja</th>
@@ -235,7 +236,7 @@
           </tbody>
         </table>
         <!--Tässä teksti siksi, että taulukko olis yhtä leveä ko ylempi taulukko. En jaksanu alkaa tyylittelemään nii käytän tämmöstä häksiä-->
-        <p class="italic m-0 p-0 text-sm text-coal">Klikkaamalla sarjataulukossa joukkueen nimeä voit tarkastella joukkueen kokoonpanoa.</p>
+
         <div v-if="onKirjautunut">
           <div class="pb-2">
             <label for="pelaaja" class="mr-2">Päivitä pelaajan</label>
@@ -541,6 +542,7 @@
 export default {
   data() {
     return {
+      naytaSalasanaKentta: false,
       uusiTeksti: '',
       tallennetutTiedot: [],
       puolivaliera1: '',
@@ -558,7 +560,7 @@ export default {
       },
       modalAuki: false,
       joukkueetPelaajat: {
-        TT: ['Tenho', 'Löyläri', 'PEdro', 'GGranny', 'Radu'],
+        TT: ['Tenho', 'Löyläri', 'Pedro', 'GGranny', 'Radu'],
         FomFom: ['romu', 'Joge', 'Mussu', 'Hasse', '-Pule'],
         GN: ['Peksi', 'Pantsi', 'Plasen', 'antiinsane', 'Jerbanderus'],
         NVS: ['vedivaan', 'Lärvi', 'Zzeit', 'elmeri:D', 'J0nesy'],
@@ -630,13 +632,13 @@ export default {
         },
         {
           aika: '5. 21:00-21:45',
-          kentta1: 'TT vs SB',
+          kentta1: 'Ruokatauko',
           kentta1Voitetut: 0,
           kentta1Havitut: 0,
-          kentta2: 'JATS vs FomFom',
+          kentta2: 'Ruokatauko',
           kentta2Voitetut: 0,
           kentta2Havitut: 0,
-          kentta3: 'NVS vs GN',
+          kentta3: 'Ruokatauko',
           kentta3Voitetut: 0,
           kentta3Havitut: 0,
         },
@@ -735,32 +737,6 @@ export default {
           kentta2Voitetut: 0,
           kentta2Havitut: 0,
           kentta3: 'FomFom vs GN',
-          kentta3Voitetut: 0,
-          kentta3Havitut: 0,
-          onTulosNakyva: true,
-        },
-        {
-          aika: '14. 13:15-14:00',
-          kentta1: 'TT vs GN',
-          kentta1Voitetut: 0,
-          kentta1Havitut: 0,
-          kentta2: 'JATS vs NVS',
-          kentta2Voitetut: 0,
-          kentta2Havitut: 0,
-          kentta3: 'FomFom vs SB',
-          kentta3Voitetut: 0,
-          kentta3Havitut: 0,
-          onTulosNakyva: true,
-        },
-        {
-          aika: '15. 14:00-14:45',
-          kentta1: 'TT vs SB',
-          kentta1Voitetut: 0,
-          kentta1Havitut: 0,
-          kentta2: 'JATS vs FomFom',
-          kentta2Voitetut: 0,
-          kentta2Havitut: 0,
-          kentta3: 'NVS vs GN',
           kentta3Voitetut: 0,
           kentta3Havitut: 0,
           onTulosNakyva: true,

@@ -7,9 +7,8 @@
       </div>
 
       <!-- PUOLIVÄLIERÄT -->
-
       <div class="mb-8">
-        <h3 class="text-lg md:text-xl mb-3 text-cta">Puolivälierät</h3>
+        <h3 class="text-lg md:text-xl mb-3 text-cta">Puolivälierät <span class="text-gray-400 text-base">(14:15–16:15)</span></h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div v-for="(match, index) in quarterFinals" :key="'qf-' + index" class="border border-pig p-4 bg-coal">
             <h4 class="font-semibold mb-3">Puolivälierä {{ index + 1 }}</h4>
@@ -49,7 +48,7 @@
 
       <!-- VÄLIERÄT -->
       <div class="mb-8">
-        <h3 class="text-lg md:text-xl mb-3 text-cta">Välierät</h3>
+        <h3 class="text-lg md:text-xl mb-3 text-cta">Välierät <span class="text-gray-400 text-base">(16:15–19:15)</span></h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div v-for="(match, index) in semiFinals" :key="'sf-' + index" class="border border-pig p-4 bg-coal">
             <h4 class="font-semibold mb-3">Välierä {{ index + 1 }}</h4>
@@ -89,7 +88,7 @@
 
       <!-- FINAALI -->
       <div class="mb-8">
-        <h3 class="text-lg md:text-xl mb-3 text-cta">Finaali</h3>
+        <h3 class="text-lg md:text-xl mb-3 text-cta">Finaali <span class="text-gray-400 text-base">(19:15–21:15)</span></h3>
         <div class="border border-pig p-4 bg-coal">
           <div class="flex flex-col gap-3">
             <input
@@ -131,12 +130,12 @@
 
       <div v-if="allMatches.length > 0" class="space-y-3">
         <div v-for="(match, index) in allMatches" :key="'result-' + index" class="border border-pig p-4 text-white">
-          <p class="font-semibold text-cta mb-4">{{ getRoundName(index) }}</p>
+          <p class="font-semibold text-cta mb-4" v-html="getRoundName(index)"></p>
 
           <div class="flex justify-between items-center">
             <!-- Joukkueiden nimet -->
             <div>
-              <p>{{ match.team1 || '–' }}</p>
+              <p class="mb-2">{{ match.team1 || '–' }}</p>
               <p>{{ match.team2 || '–' }}</p>
             </div>
 
@@ -149,8 +148,9 @@
                     'text-red-500': match.score1 < match.score2,
                     'text-gray-300': match.score1 === match.score2,
                   }"
+                  class="mb-2"
                 >
-                  {{ match.score1 }}
+                  {{ match.score1 || '0' }}
                 </span>
                 <span
                   :class="{
@@ -159,7 +159,7 @@
                     'text-gray-300': match.score1 === match.score2,
                   }"
                 >
-                  {{ match.score2 }}
+                  {{ match.score2 || '0' }}
                 </span>
               </div>
 
@@ -205,10 +205,9 @@ const finalMatch = reactive({
 
 const allMatches = computed(() => [...quarterFinals, ...semiFinals, finalMatch])
 
-// 🔹 Hae ottelut Firestoresta
 onMounted(async () => {
   try {
-    const data = await $fetch('/api/playoffs') // ✅ Käytä $fetch, ei useFetch
+    const data = await $fetch('/api/playoffs')
 
     if (Array.isArray(data)) {
       data.forEach((m) => {
@@ -234,7 +233,6 @@ onMounted(async () => {
   }
 })
 
-// 🔹 ✅ KORJATTU: käytä $fetch, ei useFetch
 async function saveMatch(round, matchNumber, match) {
   try {
     const result = await $fetch('/api/playoffs', {
@@ -267,9 +265,9 @@ function resetAll() {
 }
 
 function getRoundName(index) {
-  if (index < quarterFinals.length) return `Puolivälierä ${index + 1}`
-  else if (index < quarterFinals.length + semiFinals.length) return `Välierä ${index - quarterFinals.length + 1}`
-  else return 'Finaali'
+  if (index < quarterFinals.length) return `Puolivälierä ${index + 1} <span class="text-white">14:15–16:15</span>`
+  else if (index < quarterFinals.length + semiFinals.length) return `Välierä ${index - quarterFinals.length + 1} <span class="text-white">16:15–19:15</span>`
+  else return `Finaali <span class="text-white">19:15–21:15</span>`
 }
 </script>
 

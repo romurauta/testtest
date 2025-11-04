@@ -33,7 +33,7 @@ async function uploadData() {
 		const pelaajat = [
 			"Mussu",
 			"Joge",
-			"VerdiH",
+			"Verdi",
 			"Radu",
 			"nico_ilari",
 			"tenho",
