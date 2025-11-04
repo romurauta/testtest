@@ -265,9 +265,9 @@ function resetAll() {
 }
 
 function getRoundName(index) {
-  if (index < quarterFinals.length) return `Puolivälierä ${index + 1} <span class="text-white">14:15–16:15</span>`
-  else if (index < quarterFinals.length + semiFinals.length) return `Välierä ${index - quarterFinals.length + 1} <span class="text-white">16:15–19:15</span>`
-  else return `Finaali <span class="text-white">19:15–21:15</span>`
+  if (index < quarterFinals.length) return `Puolivälierä ${index + 1} <span class="text-white">14:30–16:30</span>`
+  else if (index < quarterFinals.length + semiFinals.length) return `Välierä ${index - quarterFinals.length + 1} <span class="text-white">16:30–19:30</span>`
+  else return `Finaali <span class="text-white">19:30–21:30</span>`
 }
 </script>
 
