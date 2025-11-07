@@ -141,7 +141,7 @@
                     v-for="joukkue in sarjataulukko"
                     :key="joukkue.nimi"
                     class="border-pig"
-                    @click="avaaModal(joukkue.nimi)"
+                    @click="avaaModal(joukkue.joukkueKokonimi)"
                   >
                     <td
                       class="border-pig cursor-pointer hover:bg-lightSmoke text-left pl-8 w-2/12"
@@ -237,7 +237,7 @@
                 class="fixed inset-0 flex items-center justify-center"
               >
                 <div
-                  class="bg-coal text-white p-12 rounded-md shadow-xl shadow-black w-3/4 md:w-1/4"
+                  class="bg-coal text-white p-6 md:p-10 rounded-md shadow-xl shadow-black w-3/4 sm:w-2/4 nd:w-1/4 lg:w-2/5"
                 >
                   <h3 class="text-xl font-bold mb-4">
                     Joukkueen
@@ -849,16 +849,29 @@ export default {
       },
       modalAuki: false,
       joukkueetPelaajat: {
-        TT: ["Tenho", "Löyläri", "Pedro", "GGranny", "Radu"],
+        "Tenhon Taistelijat": ["Tenho", "Löyläri", "Pedro", "GGranny", "Radu"],
         FomFom: ["romu", "Joge", "Mussu", "Hasse", "-Pule"],
-        GN: ["Peksi", "Pantsi", "Plasen", "antiinsane", "Jerbanderus"],
-        NVS: ["vedivaan", "Lärvi", "Zzeit", "elmeri:D", "J0nesy"],
-        JATS: ["JerDAD", "Hege", "Candle", "s1mple", "nico_ilari"],
-        SB: ["wiilis", "venyniilo", "Are", "Verdi", "Jakender"],
+        Gooners: ["Peksi", "Pantsi", "Plasen", "antiinsane", "Jerbanderus"],
+        "Noob Victory Squad": [
+          "vedivaan",
+          "Lärvi",
+          "Zzeit",
+          "elmeri:D",
+          "J0nesy",
+        ],
+        "Jere and The Stepfrags": [
+          "JerDAD",
+          "Hege",
+          "Candle",
+          "s1mple",
+          "nico_ilari",
+        ],
+        "Spandex Boys": ["wiilis", "venyniilo", "Are", "Verdi", "Jakender"],
       },
       naytaModal: false,
       modalJoukkue: "",
       joukkueenPelaajat: [],
+
       // Kirjautuminen
       salasana: "",
       onKirjautunut: false,
