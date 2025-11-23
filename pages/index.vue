@@ -843,13 +843,13 @@ export default {
       },
       modalAuki: false,
       joukkueetPelaajat: {
-        "Tenhon Taistelijat": ["Tenho", "Löyläri", "Pedro", "GGranny", "Radu"],
-        FomFom: ["romu", "Joge", "Mussu", "Hasse", "-Pule"],
-        Gooners: ["Peksi", "Pantsi", "Plasen", "antiinsane", "Jerbanderus"],
+        "Tenhon Taistelijat": ["Tenho", "Löyläri", "Plasen", "GGranny", "Radu"],
+        FomFom: ["romu", "Joge", "Mussu", "Hasse", "Verdi"],
+        Gooners: ["Peksi", "Pantsi", "Are", "antiinsane", "Jerbanderus"],
         "Noob Victory Squad": [
           "vedivaan",
           "Lärvi",
-          "Lappakeitto",
+          "Pedro",
           "elmeri:D",
           "J0nesy",
         ],
