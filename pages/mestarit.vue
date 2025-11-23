@@ -4,7 +4,7 @@
     class="items-center text-center min-h-screen bg-coal text-white p-0 sm:p-8 pb-6"
   >
     <div>
-      <h1 class="text-3xl font-bold mb-8 text-cta pt-8">Mestarit</h1>
+      <h1 class="text-3xl font-bold mb-8 text-cta pt-8">Mestaruudet</h1>
 
       <div class="space-y-6 px-4">
         <div class="mt-4 p-4 bg-smoke rounded-lg shadow-md max-w-sm mx-auto">
