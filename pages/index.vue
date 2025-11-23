@@ -864,7 +864,7 @@ export default {
           "wiilis",
           "venyniilo",
           "Lappakeitto",
-          "Verdi",
+          "Jakender",
           "-Pule",
         ],
       },
