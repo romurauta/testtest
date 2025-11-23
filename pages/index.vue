@@ -1,23 +1,9 @@
 <template>
+  <Header />
   <div class="bg-coal text-lg">
     <div class="flex flex-col items-center justify-center py-6">
       <div>
-        <h1 class="text-4xl px-8 text-center text-white shadow-lg">
-          Ranuan Kummit CS2-turnaus
-        </h1>
-      </div>
-      <div
-        class="flex justify-end mt-8 gap-y-4 items-center justify-between -mb-5"
-      >
-        <button class="text-cta ml-2 px-4 py-1 hover:bg-lightSmoke">
-          <NuxtLink to="mapban">Karttavalinta</NuxtLink>
-        </button>
-        <button
-          class="px-4 py-2 hover:bg-lightSmoke text-cta bg-coal ml-2"
-          @click="scrollaaOtteluohjelmaan"
-        >
-          Otteluohjelma
-        </button>
+        <h1 class="text-4xl px-8 text-center text-white shadow-lg"></h1>
       </div>
     </div>
 
@@ -78,6 +64,14 @@
           <div>
             <div class="flex justify-between items-center">
               <h2 class="text-xl md:text-2xl">Sarjataulukko</h2>
+              <div class="flex justify-end items-center">
+                <button
+                  class="px-4 py-2 hover:bg-lightSmoke text-cta bg-coal ml-2"
+                  @click="scrollaaOtteluohjelmaan"
+                >
+                  Otteluohjelma
+                </button>
+              </div>
             </div>
 
             <table class="mb-0 pb-0 border border-pig">

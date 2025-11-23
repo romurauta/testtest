@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-[#1c1c1c] text-white p-0 sm:p-8">
+  <div class="min-h-screen bg-coal text-white p-0 sm:p-8">
     <div class="max-w-7xl mx-auto">
       <div class="p-4">
         <NuxtLink class="text-xl" to="/">Etusivu</NuxtLink>
