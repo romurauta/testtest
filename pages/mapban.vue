@@ -1,8 +1,8 @@
 <template>
+  <Header @scroll-to-otteluohjelma="scrollaaOtteluohjelmaan" />
   <section
     class="text-white justify-center flex flex-col items-center bg-coal p-6"
   >
-    <NuxtLink class="text-2xl md:mt-20" to="/">Etusivu</NuxtLink>
     <div class="w-full md:w-1/3 mt-12 md:mb-48 mb-20">
       <div class="flex justify-between space-between items-center mb-6">
         <button
