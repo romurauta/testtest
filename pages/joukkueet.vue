@@ -10,22 +10,20 @@
     </div>
 
     <div
-      class="text-xs grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-8 max-w-7xl mx-auto px-2 md:px-0"
+      class="text-xs grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 max-w-7xl md:gap-8 mx-auto px-2 md:px-0"
     >
       <div
         v-for="(pelaajat, joukkue) in joukkueet"
         :key="joukkue"
-        class="bg-[#2c2c2c] rounded-lg shadow-md p-3 sm:p-4 border border-cta"
+        class="bg-[#2c2c2c] rounded-md shadow-md p-3 sm:p-4"
       >
         <h2
-          class="text-lg sm:text-xl font-semibold mb-2 text-cta text-center truncate"
+          class="text-lg sm:text-xl font-semibold mb-2 text-white text-center truncate"
         >
           {{ joukkue }}
         </h2>
 
-        <div
-          class="min-h-[60px] p-1 sm:p-2 rounded-md bg-[#1c1c1c] border border-dashed border-gray-600"
-        >
+        <div class="min-h-[60px] p-1 sm:p-2 bg-coal">
           <div
             v-for="pelaaja in pelaajat || []"
             :key="pelaaja"
@@ -48,9 +46,7 @@
       </div>
     </div>
 
-    <div
-      class="bg-[#2c2c2c] p-3 sm:p-6 rounded-lg border border-cta max-w-7xl mx-auto md:mt-6 mt-4"
-    >
+    <div class="p-3 bg-smoke sm:p-6 max-w-7xl mx-auto md:mt-6 mt-4 rounded-md">
       <h2 class="text-lg sm:text-xl font-semibold mb-3 text-cta text-center">
         Vapaat pelaajat
       </h2>
@@ -60,7 +56,7 @@
         <div
           v-for="pelaaja in vapaatPelaajat"
           :key="pelaaja"
-          class="bg-coal text-white border border-cta px-1 py-3 rounded-sm text-center cursor-pointer text-xs sm:text-sm hover:bg-smoke hover:text-cta transition"
+          class="bg-coal text-white px-1 py-3 rounded-sm text-center cursor-pointer text-xs sm:text-sm hover:bg-[#2c2c2c] border border-cta transition"
           :class="{
             'opacity-50 cursor-not-allowed hover:bg-coal hover:text-white':
               tallennettu,
@@ -112,7 +108,7 @@
         </p>
         <div class="flex justify-end space-x-4">
           <button
-            class="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-500 text-sm"
+            class="px-4 py-2 bg-black text-white rounded-md hover:bg-coal text-sm"
             @click="showConfirmDialog = false"
           >
             Peruuta
@@ -133,7 +129,7 @@
       @click.self="showMoveDialog = false"
     >
       <div
-        class="bg-[#2c2c2c] p-6 rounded-t-2xl shadow-xl w-full border-t border-cta max-w-lg"
+        class="bg-[#2c2c2c] p-6 rounded-t-2xl shadow-xl w-full border-t max-w-lg"
       >
         <h3 class="text-xl font-bold mb-4 text-cta">
           Siirrä pelaaja
