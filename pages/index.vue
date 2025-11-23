@@ -10,7 +10,7 @@
         class="flex justify-end mt-8 gap-y-4 items-center justify-between -mb-5"
       >
         <button class="text-cta ml-2 px-4 py-1 hover:bg-lightSmoke">
-          <NuxtLink to="mapban">Kartan valinta</NuxtLink>
+          <NuxtLink to="mapban">Karttavalinta</NuxtLink>
         </button>
         <button
           class="px-4 py-2 hover:bg-lightSmoke text-cta bg-coal ml-2"
@@ -266,7 +266,7 @@
       </div>
 
       <section class="text-white px-8 py-6 flex flex-col items-center">
-        <h2 class="mb-4 text-xl md:text-2xl">Tilastot</h2>
+        <h2 class="text-xl md:text-2xl">Tilastot</h2>
         <table class="border-pig w-full sm:w-1/3 md:2/3 text-sm">
           <thead class="border-pig">
             <tr>
@@ -409,8 +409,8 @@
         class="text-white px-8 py-6 flex flex-col items-center"
       >
         <div>
-          <h2 class="text-xl md:text-2xl">Otteluohjelma</h2>
-          <p class="mt-6 -mb-4">Perjantai 28.11.2025</p>
+          <h2 class="text-xl md:text-2xl text-center">Otteluohjelma</h2>
+          <p class="mt-6 -mb-4 text-center">Perjantai 28.11.2025</p>
           <table class="border border-pig w-full text-sm">
             <thead class="border border-pig">
               <tr class="border border-pig">
@@ -621,7 +621,7 @@
             Klikkaamalla sarjataulukossa joukkueen nimeä voit tarkastella
             joukkueen kokoonpanoa.
           </p>
-          <p class="mt-0 -mb-4">Lauantai 29.11.2025</p>
+          <p class="mt-0 -mb-4 text-center">Lauantai 29.11.2025</p>
           <table class="border border-pig w-full text-sm">
             <thead class="border border-pig">
               <tr class="border border-pig">
@@ -855,7 +855,7 @@ export default {
         "Noob Victory Squad": [
           "vedivaan",
           "Lärvi",
-          "Zzeit",
+          "Lappakeitto",
           "elmeri:D",
           "J0nesy",
         ],

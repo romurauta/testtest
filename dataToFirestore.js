@@ -82,7 +82,7 @@ async function uploadData() {
       "heGe",
       "wiilis",
       "pantsi",
-      "ZzeiT",
+      "Lappakeitto",
       "GGranny",
       "-Pule",
       "JerDAD",
