@@ -94,7 +94,7 @@
 
     <div
       v-if="showConfirmDialog"
-      class="fixed inset-0 bg-black flex items-center justify-center z-50 p-4"
+      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
       @click.self="showConfirmDialog = false"
     >
       <div
@@ -125,36 +125,37 @@
 
     <div
       v-if="showMoveDialog"
-      class="fixed inset-0 bg-black flex items-end justify-center z-50"
+      class="fixed inset-0 bg-black bg-opacity-50 flex items-end justify-center z-50"
       @click.self="showMoveDialog = false"
     >
-      <div
-        class="bg-[#2c2c2c] p-6 rounded-t-2xl shadow-xl w-full border-t max-w-lg"
-      >
-        <h3 class="text-xl font-bold mb-4 text-cta">
-          Siirrä pelaaja
+      <div class="bg-[#2c2c2c] p-6 rounded-t-md shadow-xl w-full max-w-lg">
+        <h3 class="text-xl font-bold mb-2 text-cta">
+          Siirrä
           <span class="font-semibold text-white">{{
             pelaajaJotaSiirretaan
           }}</span>
         </h3>
         <div class="space-y-4 pr-2">
           <button
-            class="w-full text-left px-4 py-3 bg-coal rounded-md hover:bg-smoke transition"
-            @click="siirraPelaaja('vapaat')"
-          >
-            Siirrä
-            <span class="font-semibold text-cta">vapaisiin pelaajiin</span>
-          </button>
-          <button
             v-for="joukkueNimi in Object.keys(joukkueet)"
             :key="joukkueNimi"
-            class="w-full text-left px-4 py-3 bg-coal rounded-md hover:bg-smoke transition text-sm"
+            class="w-full text-left px-4 md:py-3 py-4 bg-coal rounded-md hover:bg-smoke transition text-sm"
             @click="siirraPelaaja(joukkueNimi)"
           >
-            Siirrä joukkueeseen:
+            Kapteenin
             <span class="font-semibold text-cta text-base">{{
               joukkueNimi
             }}</span>
+            joukkueeseen
+          </button>
+          <button
+            class="w-full text-sm text-left px-4 md:py-3 py-4 bg-coal rounded-md hover:bg-smoke transition"
+            @click="siirraPelaaja('vapaat')"
+          >
+            Siirrä
+            <span class="font-semibold text-green-500"
+              >vapaisiin pelaajiin</span
+            >
           </button>
         </div>
         <div class="flex justify-end mt-6">
