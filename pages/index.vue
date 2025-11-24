@@ -576,7 +576,7 @@
                   class="fixed inset-0 flex items-center justify-center"
                 >
                   <div
-                    class="bg-coal text-white p-12 rounded-md shadow-xl shadow-black w-1/3"
+                    class="bg-coal text-white p-12 rounded-md border border-cta md:w-1/3 w-full"
                   >
                     <h2 class="text-lg font-bold mb-4">Muokkaa tuloksia</h2>
                     <div class="flex items-center mb-4">

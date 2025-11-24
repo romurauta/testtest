@@ -167,8 +167,8 @@
           <div class="flex justify-between items-center">
             <!-- Joukkueiden nimet -->
             <div>
-              <p class="mb-2">{{ match.team1 || "–" }}</p>
-              <p>{{ match.team2 || "–" }}</p>
+              <p class="mb-2">{{ match.team1 || "Joukkue A" }}</p>
+              <p>{{ match.team2 || "Joukkue B" }}</p>
             </div>
 
             <!-- Tulokset väreillä -->
