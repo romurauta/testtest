@@ -49,8 +49,8 @@
             <li class="text-2xl font-semibold text-cta">Olohuone</li>
             <li>Joge</li>
             <li>Peksi</li>
+            <li>J0nesy</li>
             <li>Löyläri</li>
-            <li>Jerbanderus</li>
             <li>Pedro de Pacas</li>
           </ul>
         </div>
