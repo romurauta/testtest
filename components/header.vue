@@ -1,7 +1,7 @@
 <template>
   <header class="sticky top-0 z-50 bg-[#2c2c2c] shadow-lg">
     <div>
-      <div class="flex justify-between items-center md:py-4 md:px-12 p-4">
+      <div class="flex justify-between items-center md:py-3 md:px-12 p-4">
         <NuxtLink
           to="/"
           class="text-xl font-bold tracking-wider text-white hover:text-cta transition"
