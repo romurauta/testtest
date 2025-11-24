@@ -4,6 +4,7 @@
     class="text-white justify-center flex flex-col items-center bg-coal p-6"
   >
     <div class="w-full md:w-1/3 mt-12 md:mb-48 mb-20">
+      <p class="">Valitse:</p>
       <div class="flex justify-between space-between items-center mb-6">
         <button
           @click="toggleMode"
@@ -19,14 +20,23 @@
         </button>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 mb-8 gap-0 md:gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-0 md:gap-8">
         <div class="flex-1">
-          <label class="block text-sm text-cta mb-1"></label>
-          <input
-            placeholder="Joukkueen nimi"
+          <label class="block text-sm text-cta mb-1">Joukkue A</label>
+          <select
             v-model="teamA"
             class="bg-smoke border border-pig px-3 py-1 w-full text-white placeholder-gray-400 focus:outline-none"
-          />
+          >
+            <option value="" disabled class="bg-smoke">Valitse joukkue</option>
+            <option
+              v-for="team in availableTeamsA"
+              :key="team"
+              :value="team"
+              class="bg-smoke text-white"
+            >
+              {{ team }}
+            </option>
+          </select>
           <div class="text-sm text-white font-semibold mt-2">
             Bannit <br />
             <div class="min-h-8">
@@ -41,12 +51,21 @@
         </div>
 
         <div class="flex-1">
-          <label class="block text-sm text-cta mb-1"></label>
-          <input
-            placeholder="Joukkueen nimi"
+          <label class="block text-sm text-cta mb-1">Joukkue B</label>
+          <select
             v-model="teamB"
             class="bg-smoke border border-pig px-3 py-1 w-full text-white placeholder-gray-400 focus:outline-none"
-          />
+          >
+            <option value="" disabled class="bg-smoke">Valitse joukkue</option>
+            <option
+              v-for="team in availableTeamsB"
+              :key="team"
+              :value="team"
+              class="bg-smoke text-white"
+            >
+              {{ team }}
+            </option>
+          </select>
           <div class="text-sm text-white font-semibold mt-2">
             Bannit <br />
             <div class="min-h-8">
@@ -60,13 +79,40 @@
           </div>
         </div>
       </div>
+      <div
+        v-if="isDone"
+        class="border border-pig bg-smoke rounded-lg p-4 mt-2 text-center"
+      >
+        <h3 class="font-semibold text-lg mb-3">
+          {{ mode === "bo1" ? "Pelattava kartta" : "Pelattavat kartat" }}
+        </h3>
+
+        <div v-if="mode === 'bo1'" class="flex justify-center">
+          <div class="grid grid-cols-[auto_auto]">
+            <span>{{ pickedMaps[0] }}</span>
+          </div>
+        </div>
+
+        <div v-else class="flex justify-center">
+          <div class="grid grid-cols-[auto_auto] gap-x-3 text-left">
+            <strong>1.</strong> <span>{{ pickedMaps[0] }}</span>
+            <strong>2.</strong> <span>{{ pickedMaps[1] }}</span>
+            <strong>3.</strong> <span>{{ pickedMaps[2] }}</span>
+          </div>
+        </div>
+      </div>
 
       <div class="mb-4 text-center">
-        <p v-if="!isDone" class="text-lg font-semibold">
+        <p v-if="!isDone && teamA && teamB" class="text-lg font-semibold">
           Joukkue <span class="text-cta">{{ currentTeamName }}</span>
           {{ currentActionText }}
         </p>
-        <p v-else class="text-lg text-green-400 font-semibold">Valinta tehty</p>
+        <p
+          v-else-if="!teamA || !teamB"
+          class="text-lg font-semibold text-red-400"
+        >
+          Valitse molemmat joukkueet aloittaaksesi karttaveto.
+        </p>
       </div>
 
       <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -75,7 +121,8 @@
           :key="map"
           class="p-4 border border-pig bg-smoke rounded-lg text-center cursor-pointer transition-transform hover:scale-105"
           :class="{
-            'opacity-30 cursor-not-allowed': isBanned(map),
+            // Estetään kartan valinta/bannaus, jos joukkueita ei ole valittu
+            'opacity-30 cursor-not-allowed': isBanned(map) || !teamA || !teamB,
             'bg-green-900 border-green-600': pickedMaps.includes(map),
           }"
           @click="onMapClick(map)"
@@ -94,7 +141,7 @@
       <div class="flex justify-center gap-3 mt-6">
         <button
           @click="banRandom()"
-          :disabled="isDone"
+          :disabled="isDone || !teamA || !teamB"
           class="px-4 py-2 border border-pig bg-coal text-cta hover:bg-lightSmoke disabled:opacity-50"
         >
           Random
@@ -113,33 +160,12 @@
           Nollaa
         </button>
       </div>
-
-      <div
-        v-if="isDone"
-        class="border border-pig bg-smoke rounded-lg p-4 mt-6 text-center"
-      >
-        <h3 class="font-semibold text-lg mb-3">Tulos</h3>
-
-        <div v-if="mode === 'bo1'" class="flex justify-center">
-          <div class="grid grid-cols-[auto_auto]">
-            <span>{{ pickedMaps[0] }}</span>
-          </div>
-        </div>
-
-        <div v-else class="flex justify-center">
-          <div class="grid grid-cols-[auto_auto] gap-x-3 text-left">
-            <strong>1.</strong> <span>{{ pickedMaps[0] }}</span>
-            <strong>2.</strong> <span>{{ pickedMaps[1] }}</span>
-            <strong>3.</strong> <span>{{ pickedMaps[2] }}</span>
-          </div>
-        </div>
-      </div>
     </div>
   </section>
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed, watch } from "vue";
 
 const maps = [
   "Train",
@@ -152,8 +178,13 @@ const maps = [
   "Anubis",
 ];
 
+// Joukkuelista
+const teams = ["TT", "FomFom", "GN", "NVS", "JATS", "SB"];
+
+// Alustetaan tyhjällä, jolloin oletuksena näkyy "Valitse joukkue"
 const teamA = ref("");
 const teamB = ref("");
+
 const mode = ref("bo1"); // 'bo1' or 'bo3'
 const bans = ref({ A: [], B: [] });
 const pickedMaps = ref([]);
@@ -176,14 +207,37 @@ const currentAction = computed(() =>
 const currentTeam = computed(() =>
   currentRound.value?.startsWith("A") ? "A" : "B"
 );
-const currentTeamName = computed(() =>
-  currentTeam.value === "A" ? teamA.value || "1" : teamB.value || "2"
-);
+
+// Näytettävä joukkueen nimi
+const currentTeamName = computed(() => {
+  return currentTeam.value === "A" ? teamA.value : teamB.value;
+});
+
 const isDone = computed(() =>
   mode.value === "bo1"
     ? pickedMaps.value.length === 1
     : pickedMaps.value.length === 3
 );
+
+// Laske saatavilla olevat joukkueet pudotusvalikkoihin
+const availableTeamsA = computed(() =>
+  teams.filter((team) => team !== teamB.value)
+);
+const availableTeamsB = computed(() =>
+  teams.filter((team) => team !== teamA.value)
+);
+
+// Tarkkaile valintoja: jos joukkueet yrittävät valita saman nimen, nollataan toinen.
+watch(teamA, (newVal) => {
+  if (newVal && newVal === teamB.value) {
+    teamB.value = "";
+  }
+});
+watch(teamB, (newVal) => {
+  if (newVal && newVal === teamA.value) {
+    teamA.value = "";
+  }
+});
 
 const currentActionText = computed(() =>
   currentAction.value === "ban" ? "bannaa kartan" : "valitsee kartan"
@@ -197,6 +251,9 @@ function remainingMaps() {
 }
 
 function onMapClick(map) {
+  // Tarkistus, että molemmat joukkueet on valittu ennen kuin vetoa aloitetaan
+  if (!teamA.value || !teamB.value) return;
+
   if (isDone.value || isBanned(map) || pickedMaps.value.includes(map)) return;
 
   if (currentAction.value === "ban") {
@@ -213,19 +270,24 @@ function onMapClick(map) {
 function stepTurn() {
   turnIndex.value++;
   if (mode.value === "bo1" && remainingMaps().length === 1) {
+    // BO1 lopetus: Jäljelle jäänyt kartta on pelattava kartta
     pickedMaps.value = [remainingMaps()[0]];
   } else if (
     mode.value === "bo3" &&
     turnIndex.value >= currentRounds.value.length
   ) {
+    // BO3 lopetus: Jäljelle jäänyt kartta on kolmas kartta, jos sitä ei ole vielä valittu
     const remaining = remainingMaps();
-    if (remaining.length === 1) pickedMaps.value.push(remaining[0]);
+    if (remaining.length === 1 && pickedMaps.value.length < 3) {
+      pickedMaps.value.push(remaining[0]);
+    }
   }
 }
 
 function banRandom() {
   const avail = remainingMaps();
-  if (!avail.length || isDone.value) return;
+  // Estetään random-toiminto jos joukkueet puuttuvat tai veto on valmis
+  if (!avail.length || isDone.value || !teamA.value || !teamB.value) return;
   const rand = avail[Math.floor(Math.random() * avail.length)];
   onMapClick(rand);
 }

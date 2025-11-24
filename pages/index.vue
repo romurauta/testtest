@@ -63,7 +63,11 @@
         <section class="text-white flex flex-col items-center">
           <div>
             <div class="flex justify-between items-center">
-              <h2 class="text-xl md:text-2xl">Sarjataulukko</h2>
+              <div class="flex items-center">
+                <h2 class="text-xl md:text-2xl">Sarjataulukko</h2>
+                <Tooltip />
+              </div>
+
               <div class="flex justify-end items-center">
                 <button
                   class="px-4 py-2 hover:bg-lightSmoke text-cta bg-coal ml-2"
@@ -73,7 +77,6 @@
                 </button>
               </div>
             </div>
-
             <table class="mb-0 pb-0 border border-pig">
               <thead class="border border-pig">
                 <tr>
@@ -82,34 +85,34 @@
                   <th class="border-pig bg-smoke relative group">
                     V
                     <span
-                      class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-max max-w-xs rounded bg-black text-white text-sm px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-50"
+                      class="absolute bottom-full left-1/2 -translate-x-1/2 w-max max-w-xs rounded text-white text-sm px-2 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-50"
                     >
-                      Voitto
+                      Voitot
                     </span>
                   </th>
 
                   <th class="border-pig bg-smoke relative group">
                     T
                     <span
-                      class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-max max-w-xs rounded bg-black text-white text-sm px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-50"
+                      class="absolute bottom-full left-1/2 -translate-x-1/2 w-max max-w-xs rounded text-white text-sm px-2 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-50"
                     >
-                      Tasapeli
+                      Tasapelit
                     </span>
                   </th>
 
                   <th class="border-pig bg-smoke relative group">
                     H
                     <span
-                      class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-max max-w-xs rounded bg-black text-white text-sm px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-50"
+                      class="absolute bottom-full left-1/2 -translate-x-1/2 w-max max-w-xs rounded text-white text-sm px-2 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-50"
                     >
-                      Häviö
+                      Häviöt
                     </span>
                   </th>
 
                   <th class="border-pig bg-smoke relative group">
                     P
                     <span
-                      class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-max max-w-xs rounded bg-black text-white text-sm px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-50"
+                      class="absolute bottom-full left-1/2 -translate-x-1/2 w-max max-w-xs rounded text-white text-sm px-2 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-50"
                     >
                       Pisteet
                     </span>
@@ -269,27 +272,27 @@
               <th class="border-pig bg-smoke relative group">
                 K
                 <span
-                  class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-max max-w-xs rounded bg-black text-white text-xs px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-50"
+                  class="absolute bottom-full left-1/2 -translate-x-1/2 w-max max-w-xs rounded text-white text-xs px-2 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-50"
                 >
-                  Kill
+                  Kills
                 </span>
               </th>
 
               <th class="border-pig bg-smoke relative group">
                 D
                 <span
-                  class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-max max-w-xs rounded bg-black text-white text-sm px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-50"
+                  class="absolute bottom-full left-1/2 -translate-x-1/2 w-max max-w-xs rounded text-white text-sm px-2 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-50"
                 >
-                  Death
+                  Deaths
                 </span>
               </th>
 
               <th class="border-pig bg-smoke relative group">
                 A
                 <span
-                  class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-max max-w-xs rounded bg-black text-white text-sm px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-50"
+                  class="absolute bottom-full left-1/2 -translate-x-1/2 w-max max-w-xs rounded text-white text-sm px-2 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-50"
                 >
-                  Assist
+                  Assists
                 </span>
               </th>
 

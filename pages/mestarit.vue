@@ -62,7 +62,7 @@
             <li>Are</li>
             <li>Romu</li>
             <li>-Pule</li>
-            <li>Pedro</li>
+            <li>wiilis</li>
             <li>JerDAD</li>
           </ul>
         </div>
@@ -74,7 +74,7 @@
             <li>Are</li>
             <li>Romu</li>
             <li>-Pule</li>
-            <li>Pedro</li>
+            <li>wiilis</li>
             <li>JerDAD</li>
           </ul>
         </div>
@@ -86,7 +86,7 @@
             <li>Are</li>
             <li>Romu</li>
             <li>-Pule</li>
-            <li>Pedro</li>
+            <li>wiilis</li>
             <li>JerDAD</li>
           </ul>
         </div>
