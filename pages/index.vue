@@ -58,8 +58,8 @@
       </div>
     </transition>
 
-    <div class="container py-6">
-      <div class="mb-6">
+    <div class="">
+      <div class="container mb-6">
         <section class="text-white flex flex-col items-center">
           <div>
             <div class="flex justify-between items-center">
@@ -262,17 +262,19 @@
         </section>
       </div>
 
-      <section class="text-white px-8 py-6 flex flex-col items-center">
+      <section class="text-white px-2 md:px-8 flex flex-col items-center">
         <h2 class="text-xl md:text-2xl">Tilastot</h2>
-        <table class="border-pig w-full sm:w-1/3 md:2/3 text-sm">
+        <table
+          class="border-pig w-full md:w-4/5 lg:w-2/3 xl:w-1/3 text-sm table-fixed"
+        >
           <thead class="border-pig">
             <tr>
-              <th class="border-pig bg-smoke">Pelaaja</th>
+              <th class="border-pig bg-smoke w-5/12">Pelaaja</th>
 
               <th class="border-pig bg-smoke relative group">
                 K
                 <span
-                  class="absolute bottom-full left-1/2 -translate-x-1/2 w-max max-w-xs rounded text-white text-xs px-2 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-50"
+                  class="absolute bottom-full left-1/2 -translate-x-1/2 w-max max-w-xs rounded text-white text-sm px-2 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-50"
                 >
                   Kills
                 </span>
@@ -296,7 +298,7 @@
                 </span>
               </th>
 
-              <th class="border-pig bg-smoke relative group">K/D Ratio</th>
+              <th class="border-pig bg-smoke relative group">K/D</th>
             </tr>
           </thead>
 
@@ -326,7 +328,7 @@
                 class="border-pig px-12"
               >
                 <td
-                  class="w-3/12 text-left border-pig whitespace-nowrap"
+                  class="w-5/12 text-left border-pig whitespace-nowrap pl-3"
                   :class="{ 'flame-effect': index < 5 }"
                 >
                   {{ index + 1 }}. {{ pelaaja.nimi }}
@@ -407,7 +409,9 @@
       >
         <div>
           <h2 class="text-xl md:text-2xl text-center">Otteluohjelma</h2>
-          <p class="mt-6 -mb-4 text-center">Perjantai 28.11.2025</p>
+          <p class="mt-6 -mb-4 text-center text-cta font-semibold">
+            Perjantai 28.11.2025
+          </p>
           <table class="border border-pig w-full text-sm">
             <thead class="border border-pig">
               <tr class="border border-pig">
@@ -613,12 +617,10 @@
               </transition>
             </tbody>
           </table>
-          <!--Tässä teksti siksi, että taulukko olis yhtä leveä ko ylempi taulukko. En jaksanu alkaa tyylittelemään nii käytän tämmöstä häksiä-->
-          <p class="italic m-0 p-0 text-sm mb-4 text-coal">
-            Klikkaamalla sarjataulukossa joukkueen nimeä voit tarkastella
-            joukkueen kokoonpanoa.
+
+          <p class="mt-0 -mb-4 text-center text-cta font-semibold">
+            Lauantai 29.11.2025
           </p>
-          <p class="mt-0 -mb-4 text-center">Lauantai 29.11.2025</p>
           <table class="border border-pig w-full text-sm">
             <thead class="border border-pig">
               <tr class="border border-pig">
