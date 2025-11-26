@@ -179,7 +179,7 @@ const maps = [
 ];
 
 // Joukkuelista
-const teams = ["TT", "FomFom", "GN", "NVS", "JATS", "SB"];
+const teams = ["FomFom", "GN", "JATS", "NVS", "SB", "TT"];
 
 // Alustetaan tyhjällä, jolloin oletuksena näkyy "Valitse joukkue"
 const teamA = ref("");

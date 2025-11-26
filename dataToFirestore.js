@@ -18,14 +18,6 @@ async function uploadData() {
     // Sarjataulukko data
     const sarjataulukko = [
       {
-        nimi: "TT",
-        joukkueKokonimi: "Tenhon Taistelijat",
-        voitot: 0,
-        tasapelit: 0,
-        havio: 0,
-        pisteet: 0,
-      },
-      {
         nimi: "FomFom",
         joukkueKokonimi: "FomFom",
         voitot: 0,
@@ -42,14 +34,6 @@ async function uploadData() {
         pisteet: 0,
       },
       {
-        nimi: "NVS",
-        joukkueKokonimi: "Noob Victory Squad",
-        voitot: 0,
-        tasapelit: 0,
-        havio: 0,
-        pisteet: 0,
-      },
-      {
         nimi: "JATS",
         joukkueKokonimi: "Jere and The Stepfrags",
         voitot: 0,
@@ -58,8 +42,25 @@ async function uploadData() {
         pisteet: 0,
       },
       {
+        nimi: "NVS",
+        joukkueKokonimi: "Noob Victory Squad",
+        voitot: 0,
+        tasapelit: 0,
+        havio: 0,
+        pisteet: 0,
+      },
+
+      {
         nimi: "SB",
         joukkueKokonimi: "Spandex Boys",
+        voitot: 0,
+        tasapelit: 0,
+        havio: 0,
+        pisteet: 0,
+      },
+      {
+        nimi: "TT",
+        joukkueKokonimi: "Tenhon Taistelijat",
         voitot: 0,
         tasapelit: 0,
         havio: 0,

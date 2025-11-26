@@ -106,26 +106,12 @@
 </template>
 
 <script setup>
-import { ref, defineEmits } from "vue";
-
-// Määritellään emit-funktio, jolla voidaan lähettää tapahtumia
-const emit = defineEmits(["scroll-to-otteluohjelma"]);
+import { ref } from "vue";
 
 // Mobiilivalikon tila
 const menuOpen = ref(false);
 
 const toggleMenu = () => {
   menuOpen.value = !menuOpen.value;
-};
-
-// Funktio, joka lähettää scroll-tapahtuman (työpöytävalikko)
-const emitScroll = () => {
-  emit("scroll-to-otteluohjelma");
-};
-
-// Funktio, joka lähettää scroll-tapahtuman ja sulkee valikon (mobiilivalikko)
-const emitScrollAndClose = () => {
-  emitScroll();
-  toggleMenu();
 };
 </script>
