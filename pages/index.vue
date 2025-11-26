@@ -141,7 +141,7 @@
                     @click="avaaModal(joukkue.joukkueKokonimi)"
                   >
                     <td
-                      class="border-pig cursor-pointer hover:bg-lightSmoke text-left pl-8 w-2/12"
+                      class="border-pig cursor-pointer hover:bg-lightSmoke text-left pl-3 md:pl-4 w-2/12"
                     >
                       {{ joukkue.nimi }}
                     </td>
