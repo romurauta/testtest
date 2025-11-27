@@ -227,7 +227,6 @@
               </div>
             </div>
 
-            <!-- Modal for showing team players -->
             <transition appear name="modal">
               <div
                 v-if="naytaModal"
@@ -794,9 +793,9 @@
         <Playoffs :isLoggedIn="onKirjautunut" />
       </section>
     </div>
+    <!--
     <div class="flex justify-end container">
       <div class="text-white">
-        <!-- Näytetään joko Kirjaudu-painike tai salasana-kenttä ja painike -->
         <div v-if="!naytaSalasanaKentta">
           <button
             class="text-cta ml-2 px-4 py-1 border border-pig hover:bg-lightSmoke"
@@ -823,10 +822,14 @@
         </div>
       </div>
     </div>
+    -->
   </div>
 </template>
 
 <script>
+import { mapState, mapStores } from "pinia";
+import { useAuthStore } from "@/stores/auth";
+
 export default {
   data() {
     return {
@@ -879,7 +882,6 @@ export default {
 
       // Kirjautuminen
       salasana: "",
-      onKirjautunut: false,
       virhe: false,
       // Kirjautuminen
       joukkueet: [],
@@ -1067,6 +1069,19 @@ export default {
   },
   mounted() {
     this.haePlayoffsTiedot();
+    this.checkLoginStatus();
+  },
+  computed: {
+    // 1. Käytä mapStores tuomaan store objekti `authStore`
+    ...mapStores(useAuthStore),
+
+    // 2. Käytä mapState tuomaan getter 'kirjautumisTila'
+    //    nimellä 'onKirjautunut' suoraan komponentin computed-osioon
+    ...mapState(useAuthStore, {
+      onKirjautunut: "kirjautumisTila", // Nimi komonentissa: 'onKirjautunut', Nimi storeessa: 'kirjautumisTila'
+    }),
+
+    // Nyt voit käyttää 'onKirjautunut' suoraan templatessa
   },
   methods: {
     async haeTiedot() {
@@ -1209,15 +1224,6 @@ export default {
       this.naytaModal = false;
       this.modalJoukkue = "";
       this.joukkueenPelaajat = [];
-    },
-
-    kirjauduSisaan() {
-      if (this.salasana === "rantanen") {
-        this.onKirjautunut = true;
-        this.virhe = false;
-      } else {
-        this.virhe = true;
-      }
     },
 
     async haeOttelut() {

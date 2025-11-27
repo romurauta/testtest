@@ -31,12 +31,21 @@
           >
             Mestaruudet
           </NuxtLink>
+
+          <div v-if="!isLoggedIn" class="flex items-center">
+            <NuxtLink
+              to="/login"
+              class="text-white hover:text-cta px-3 py-4 rounded-md font-medium transition font-semibold"
+            >
+              Kirjaudu
+            </NuxtLink>
+          </div>
         </nav>
 
         <div class="sm:hidden">
           <button
             @click="toggleMenu"
-            class="p-2 rounded-md text-white hover:text-cta focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cta"
+            class="p-2 rounded-md text-white focus:outline-none"
           >
             <svg
               v-if="!menuOpen"
@@ -73,10 +82,7 @@
       </div>
     </div>
 
-    <nav
-      v-if="menuOpen"
-      class="sm:hidden border-t border-gray-700 bg-[#1c1c1c] pb-2"
-    >
+    <nav v-if="menuOpen" class="sm:hidden bg-smoke pb-2">
       <NuxtLink
         @click="toggleMenu"
         to="/"
@@ -101,17 +107,52 @@
       >
         Mestaruudet
       </NuxtLink>
+
+      <div v-if="!isLoggedIn">
+        <NuxtLink
+          to="/login"
+          class="block p-4 text-base font-medium text-white hover:bg-[#3a3a3a] hover:text-cta transition font-semibold w-full text-left"
+        >
+          Kirjaudu
+        </NuxtLink>
+      </div>
     </nav>
   </header>
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, defineEmits, defineProps } from "vue";
+import Login from "./login.vue"; // Lisää tämä rivi, jos et ole varma Nuxtin automaattisesta tuonnista
 
-// Mobiilivalikon tila
+// --- PROPS & EMITS ---
+
+const props = defineProps({
+  isLoggedIn: {
+    type: Boolean,
+    default: false,
+  },
+});
+
+const emit = defineEmits(["loggedIn", "logout"]);
+
+// --- REF-VIITTAUKSET MODAALIIN ---
+
 const menuOpen = ref(false);
 
 const toggleMenu = () => {
   menuOpen.value = !menuOpen.value;
+};
+
+const handleLoggedIn = () => {
+  emit("loggedIn");
+};
+
+const handleLogout = () => {
+  emit("logout");
+};
+
+const handleLogoutAndCloseMenu = () => {
+  handleLogout();
+  toggleMenu();
 };
 </script>
