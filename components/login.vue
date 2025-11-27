@@ -48,10 +48,7 @@
 </template>
 
 <script setup>
-import { ref, defineEmits, defineExpose } from "vue"; // onMounted poistettu
-
-// Määritellään sallitut tapahtumat: loggedIn, loggedOut
-const emit = defineEmits(["loggedIn", "loggedOut"]);
+import { ref, defineExpose } from "vue"; // onMounted poistettu
 
 const isOpen = ref(false);
 const password = ref("");

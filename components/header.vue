@@ -121,8 +121,7 @@
 </template>
 
 <script setup>
-import { ref, defineEmits, defineProps } from "vue";
-import Login from "./login.vue"; // Lisää tämä rivi, jos et ole varma Nuxtin automaattisesta tuonnista
+import { ref, defineProps } from "vue";
 
 // --- PROPS & EMITS ---
 
@@ -132,8 +131,6 @@ const props = defineProps({
     default: false,
   },
 });
-
-const emit = defineEmits(["loggedIn", "logout"]);
 
 // --- REF-VIITTAUKSET MODAALIIN ---
 
