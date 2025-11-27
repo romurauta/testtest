@@ -176,53 +176,66 @@
               <span>tilastoja</span>
             </div>
 
-            <div class="pt-6" v-if="onKirjautunut">
-              <p class="pr-6">Lisää joukkueelle</p>
-              <div
-                class="mb-4 flex items-center md:border-none md:pb-0 pb-8 border-b"
-              >
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-0">
-                  <button
-                    class="px-4 text-cta py-1 mr-4 border border-pig hover:bg-lightSmoke bg-coal"
-                    @click="lisaaTulos('voitto', +1)"
+            <div
+              class="grid grid-cols-2 md:grid-cols-1 pt-6 gap-4"
+              v-if="onKirjautunut"
+            >
+              <div>
+                <p class="pr-6 pb-2">
+                  <span class="text-green-500">Lisää</span>
+                </p>
+                <div class="mb-4 flex items-center md:pb-0 pb-8">
+                  <div
+                    class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-4 w-4/5 md:w-full"
                   >
-                    Voitto
-                  </button>
-                  <button
-                    class="px-4 text-cta py-1 border border-pig hover:bg-lightSmoke bg-coal"
-                    @click="lisaaTulos('tasapeli', +1)"
-                  >
-                    Tasapeli
-                  </button>
-                  <button
-                    class="px-4 text-cta py-1 mx-0 md:mx-4 border border-pig hover:bg-lightSmoke bg-coal"
-                    @click="lisaaTulos('havio', +1)"
-                  >
-                    Häviö
-                  </button>
+                    <button
+                      class="w-full px-4 text-cta py-1 border border-pig hover:bg-lightSmoke bg-coal"
+                      @click="lisaaTulos('voitto', +1)"
+                    >
+                      Voitto
+                    </button>
+                    <button
+                      class="w-full px-4 text-cta py-1 border border-pig hover:bg-lightSmoke bg-coal"
+                      @click="lisaaTulos('tasapeli', +1)"
+                    >
+                      Tasapeli
+                    </button>
+                    <button
+                      class="w-full px-4 text-cta py-1 border border-pig hover:bg-lightSmoke bg-coal"
+                      @click="lisaaTulos('havio', +1)"
+                    >
+                      Häviö
+                    </button>
+                  </div>
                 </div>
               </div>
-              <p class="pr-4">Poista joukkueelta</p>
-              <div class="mb-4 flex items-center">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-0">
-                  <button
-                    class="px-4 text-cta py-1 mr-4 border border-pig hover:bg-lightSmoke bg-coal"
-                    @click="lisaaTulos('voitto', -1)"
+              <div>
+                <p class="pr-6 pb-2">
+                  <span class="text-red-400">Poista</span>
+                </p>
+                <div class="mb-4 flex items-center md:pb-0 pb-8">
+                  <div
+                    class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-4 w-4/5 md:w-full"
                   >
-                    Voitto
-                  </button>
-                  <button
-                    class="px-4 text-cta py-1 border border-pig hover:bg-lightSmoke bg-coal"
-                    @click="lisaaTulos('tasapeli', -1)"
-                  >
-                    Tasapeli
-                  </button>
-                  <button
-                    class="px-4 text-cta py-1 mx-0 md:mx-4 border border-pig hover:bg-lightSmoke bg-coal"
-                    @click="lisaaTulos('havio', -1)"
-                  >
-                    Häviö
-                  </button>
+                    <button
+                      class="w-full px-4 text-cta py-1 border border-pig hover:bg-lightSmoke bg-coal"
+                      @click="lisaaTulos('voitto', -1)"
+                    >
+                      Voitto
+                    </button>
+                    <button
+                      class="w-full px-4 text-cta py-1 border border-pig hover:bg-lightSmoke bg-coal"
+                      @click="lisaaTulos('tasapeli', -1)"
+                    >
+                      Tasapeli
+                    </button>
+                    <button
+                      class="w-full px-4 text-cta py-1 border border-pig hover:bg-lightSmoke bg-coal"
+                      @click="lisaaTulos('havio', -1)"
+                    >
+                      Häviö
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
