@@ -953,19 +953,7 @@ export default {
           kentta3Havitut: 0,
         },
         {
-          aika: "21:00-21:45",
-          kentta1: "RUOKATAUKO",
-          kentta1Voitetut: null,
-          kentta1Havitut: null,
-          kentta2: "RUOKATAUKO",
-          kentta2Voitetut: null,
-          kentta2Havitut: null,
-          kentta3: "RUOKATAUKO",
-          kentta3Voitetut: null,
-          kentta3Havitut: null,
-        },
-        {
-          aika: "5. 21:45-22:30",
+          aika: "5. 21:00-21:45",
           kentta1: "TT vs SB",
           kentta1Voitetut: 0,
           kentta1Havitut: 0,
@@ -977,7 +965,7 @@ export default {
           kentta3Havitut: 0,
         },
         {
-          aika: "6. 22:30-23:15",
+          aika: "6. 21:45-22:30",
           kentta1: "JATS vs TT",
           kentta1Voitetut: 0,
           kentta1Havitut: 0,
@@ -989,7 +977,7 @@ export default {
           kentta3Havitut: 0,
         },
         {
-          aika: "7. 23:15-00:00",
+          aika: "7. 22:30-23:15",
           kentta1: "FomFom vs TT",
           kentta1Voitetut: 0,
           kentta1Havitut: 0,
@@ -1001,7 +989,7 @@ export default {
           kentta3Havitut: 0,
         },
         {
-          aika: "8. 00:00-00:45",
+          aika: "8. 23:15-00:00",
           kentta1: "NVS vs TT",
           kentta1Voitetut: 0,
           kentta1Havitut: 0,
@@ -1013,7 +1001,7 @@ export default {
           kentta3Havitut: 0,
         },
         {
-          aika: "9. 00:45-01:30",
+          aika: "9. 00:00-00:45",
           kentta1: "GN vs TT",
           kentta1Voitetut: 0,
           kentta1Havitut: 0,
@@ -1027,7 +1015,7 @@ export default {
       ],
       otteluohjelmaLauantai: [
         {
-          aika: "10. 11:00-11:45",
+          aika: "10. 00:45-01:30",
           kentta1: "SB vs TT",
           kentta1Voitetut: 0,
           kentta1Havitut: 0,
@@ -1040,7 +1028,7 @@ export default {
           onTulosNakyva: true,
         },
         {
-          aika: "11. 11:45-12:30",
+          aika: "11. 11:00-11:45",
           kentta1: "TT vs JATS",
           kentta1Voitetut: 0,
           kentta1Havitut: 0,
@@ -1053,7 +1041,7 @@ export default {
           onTulosNakyva: true,
         },
         {
-          aika: "12. 12:30-13:15",
+          aika: "12. 11:45-12:30",
           kentta1: "TT vs FomFom",
           kentta1Voitetut: 0,
           kentta1Havitut: 0,
@@ -1064,18 +1052,6 @@ export default {
           kentta3Voitetut: 0,
           kentta3Havitut: 0,
           onTulosNakyva: true,
-        },
-        {
-          aika: "13:15-14:30",
-          kentta1: "RUOKATAUKO",
-          kentta1Voitetut: null,
-          kentta1Havitut: null,
-          kentta2: "RUOKATAUKO",
-          kentta2Voitetut: null,
-          kentta2Havitut: null,
-          kentta3: "RUOKATAUKO",
-          kentta3Voitetut: null,
-          kentta3Havitut: null,
         },
       ],
     };
