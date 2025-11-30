@@ -8,6 +8,18 @@
 
       <div class="space-y-6 px-4">
         <div class="mt-4 p-4 bg-smoke rounded-lg shadow-md max-w-sm mx-auto">
+          <h2 class="text-2xl font-semibold mb-3">Syksy 2025</h2>
+          <ul class="list-none p-0 text-lg">
+            <li class="text-2xl font-semibold text-cta">FomFom</li>
+            <li>Mussu</li>
+            <li>Verdi</li>
+            <li>Romu</li>
+            <li>Joge</li>
+            <li>Hasse</li>
+          </ul>
+        </div>
+
+        <div class="mt-4 p-4 bg-smoke rounded-lg shadow-md max-w-sm mx-auto">
           <h2 class="text-2xl font-semibold mb-3">Syksy 2024</h2>
           <ul class="list-none p-0 text-lg">
             <li class="text-2xl font-semibold text-cta">VFC</li>
