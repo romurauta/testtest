@@ -1,5 +1,4 @@
 <template>
-  <Header />
   <div class="bg-coal text-lg">
     <div class="flex flex-col items-center justify-center py-6">
       <div>

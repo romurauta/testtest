@@ -1,6 +1,5 @@
 <template>
-  <Header />
-  <div class="flex items-center justify-center pt-24 px-4 text-center">
+  <div class="min-h-screen flex items-center justify-center px-4 text-center">
     <div class="bg-smoke rounded-lg shadow-xl w-full max-w-md p-6 relative">
       <div v-if="auth.onKirjautunut">
         <h2 class="text-white text-xl font-semibold mb-4">Admin</h2>

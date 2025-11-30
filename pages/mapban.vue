@@ -1,5 +1,4 @@
 <template>
-  <Header @scroll-to-otteluohjelma="scrollaaOtteluohjelmaan" />
   <section
     class="text-white justify-center flex flex-col items-center bg-coal p-6"
   >

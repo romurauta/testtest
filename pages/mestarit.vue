@@ -1,5 +1,4 @@
 <template>
-  <Header @scroll-to-otteluohjelma="scrollaaOtteluohjelmaan" />
   <div
     class="items-center text-center min-h-screen bg-coal text-white p-0 sm:p-8 pb-6"
   >
